@@ -34,55 +34,70 @@
 <body>
 
    <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.html">Emily Rizzo</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                        <a href="#" data-toggle="dropdown" >Games <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="steppingstones.html">Stepping Stones</a></li>
-                            <li><a href="flocking.html">Flocking</a></li>
-                            <li><a href="marble.html">Marble Madness</a></li>
-                
-              </ul>
-            </li>
-                    
-                    
-                    <li>
-                        <a href="art.html">Art</a>
-                    </li>
-                    <li>
-                        <a href="contact.html">Contact</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
+    <div id="nav"></div>
 
     <!-- Page Content -->
     <div class="container">
 
+        <!--Copy and paste the code below into your bootstrap html page -->
+
+        <h1>Contact</h1>
+           <h3 style="color:#FF6633;"><?php echo $_GET[msg];?></h3>
+           <hr>
+
+        
+        <form name="enq" method="post" action="email/" onsubmit="return validation();">
+  <div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+    <input id="name" type="text" class="form-control" name="name" placeholder="Name" value="">
+  </div>
+  <div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+    <input id="email" type="text" class="form-control" name="email" placeholder="Email" value="">
+  </div>
+  <div class="form-group">
+  <label for="comment">Message:</label>
+  <textarea class="form-control" rows="11" name="message" id="message"></textarea>
+</div>
+            <div class = "form-group"></div>
+        <input id="submit" name="submit" type="submit" value="Send" class="btn btn-primary">
+        </div>  
+        
+        
+        <div class="form-group">
+		<div class="col-sm-10 col-sm-offset-2">
+			<?php echo $result; ?>	
+		</div>
+	</div>
+            
+</form>
+        
+        <!--
+        <form name="enq" method="post" action="email/" onsubmit="return validation();">
+        <fieldset>
+
+        <input type="text" name="name" id="name" value=""  class="input-block-level" placeholder="Name" width="100%" /><br>
+        <input type="text" name="email" id="email" value="" class="input-block-level" placeholder="Email" width="100%"/><br>
+        <textarea rows="11" name="message" id="message" class="input-block-level" placeholder="Comments"></textarea><br><br>
+
+        <div class="actions">
+        <input type="submit" value="Send Your Message" name="submit" id="submitButton" class="btn btn-info pull-right" title="Click here to submit your message!" />
+        </div>
+
+        </fieldset>
+        </form> 
+        -->
+        
+        
+        
+        <!--
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h1>A Bootstrap Starter Template</h1>
-                <p class="lead">Complete with pre-defined file paths that you won't have to change!!</p>
+                <h1>Contact</h1>
+                <p class="lead"></p>
                 <ul class="list-unstyled">
-                    <li>Bootstrap v3.3.7</li>
-                    <li>jQuery v1.11.1</li>
+                    <li><a href = "mailto:emilytrizzo@gmail.com">Email: emilytrizzo@gmail.com</a></li>
+                    <li><a href = "https://www.linkedin.com/in/emily-rizzo-061122a6/">LinkedIn</a></li>
                 </ul>
             </div>
         </div>
@@ -96,6 +111,18 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
+    
+        <!-- include javascript for nav bar -->
+    <script src="js/include.js"></script>
+    
+    <script> 
+        $(function(){
+            $("#nav").load("nav.html");
+        });
+    </script> 
+    
+    <!--contact-->
+    <script src="email/validation.js" type="text/javascript"></script>
 
 </body>
 
