@@ -37,7 +37,7 @@
         <!-- Portfolio Item Heading -->
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">UNWelcome
+                <h1 class="page-header" id="top">UNWelcome
                     
                 </h1>
             </div>
@@ -45,19 +45,45 @@
         <!-- /.row -->
 
         <!-- Portfolio Item Row -->
+        <!--
         <div class="row">
 
-             <!--<div class="col-md-8">
+             <div class="col-md-8">
                
 <iframe src="https://etrizzo.github.io/361/stepping-stones/stepping-stones.html" width="750px" height="500px" scrolling="no"></iframe>
                 <iframe src="https://etrizzo.github.io/361/stepping-stones/stepping-stones.html" width="100%" height="700px" scrolling="no" style="border:0px #000000 none;" name="Stepping Stones" align="center"></iframe>
-                <!--<img class="img-responsive" src="http://placehold.it/750x500" alt=""> 
+                <img class="img-responsive" src="http://placehold.it/750x500" alt=""> 
             </div>-->
 
             <img src="https://etrizzo.github.io/FeatureImage.png" width="100%" height="700px" scrolling="no" style="border:0px #000000 none;" name="UNWelcome" align="center">
                 <h3>About UNWelcome</h3>
                 <p>Unwelcome is a turn-based tower defense game where you play as a witch who has moved to the suburbs for some peace and quiet. Unfortunately, you’re quickly disturbed by frequent, unprompted visits by your overly-friendly neighbors. The only solution to this is to summon your faithful demons from other realms to get those pesky neighbors out of your house, and enjoy some much-deserved peace and quiet.</p>
-                <p>UNWelcome was developed for mobile phones and tablets using Unity over the course of 3 months. On our five person team, I was the only programmer. During this time we developed using an AGILE methodology, and performed playtests with industry professionals and blind playtesters.</p>
+                <p>UNWelcome was developed for mobile phones and tablets using Unity 5, over the course of 3 months. On our five person team, I was the only software developer. During this time we developed using an AGILE methodology, and performed playtests with industry professionals and blind playtesters.</p>
+
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h3>Specs</h3>
+                            <ul>
+                                <li>Engine: <b>Unity 5</b></li>
+                                <li>Language: <b>C#</b></li>
+                                <li>Team size: <b>5</b></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-6">
+                            <h3>Features</h3>
+                            <ul>
+                                <li><a href="#demonsection">Demon towers</a></li>
+                                <li><a href="#combosection">Demon Combinations</a></li>
+                                <li><a href="#summoningsection">Summoning Interface</a></li>
+                                <li><a href="#tutorialsection">Tutorial Level</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
                 <br>
 
                         <a href="https://etrizzo.github.io/UNWelcome_LAUNCH.zip"><button type="button" class="btn btn-primary">
@@ -74,7 +100,7 @@
 
                 <h3>Game Details</h3>
                 <hr>
-                <h4>Demons</h4>
+                <h4 id="demonsection">Demons</h4> 
                 <p>Demons are summoned by the player at in between turns, and are used to move neighbors out of the house. Each demon has a unique effect, and the combination of these mechanics make up the core experience of the game. It was very important that each individual mechanic was reliable and predictable, so that players could combine them and create interesting solutions to each puzzle.</p>
                 <p>Demons all follow a common structure: They have an array of activation tiles (tiles that they can fire on), and a tile that they push to. These variables are determined upon placement/rotation, depending on the specific type of demon. When a demon fires, all neighbors in the range are set to move to the target tile, and given special flags to determine how they are moving. After a demon fires, it will go on cooldown for some number of "steps" that the neighbors take, dependent on the type of demon. I chose to structure demons this way to give me the most flexibility in terms of demon mechanics, and to give my level designers some flexibility in balancing ranges and cooldowns by exposing these variables.</p>
                 <br>
@@ -158,17 +184,22 @@
                 </div> -->
 
                 <br>
+                <a href="#top"> Back To Top</a>
+                <br>
                 <hr>
-                <h4>Combinations</h4>
+                <h4 id="combosection">Combinations</h4>
                 <div align="center">
                     <img src = "https://etrizzo.github.io/combos.gif" align="center">
                 </div>
                 <br>
                 <p>UNWelcome is all about solving puzzles in unique ways, so it was very important that the demon mechanics be able to combine and give users flexibility in their solutions. When fired through the activation area of another demon, neighbors will trigger that demon, and be put on a new path. This allows for elaborate combinations to be used to eliminate many neighbors at once. </p>
                 <p>In code, when a demon fires, it first checks for a demon in its range that can be activated, and pushes to that tile instead of it’s ‘intended’ destination. It was important for this to work as the player might intuit – if a demon in the path is on cooldown and can't fire, it should have no effect on the neighbor's movement. </p>
+                <br>
+                <a href="#top"> Back To Top</a>
+                <br>
 
                 <hr>
-                <h4>Summoning Interface</h4>
+                <h4 id="summoningsection">Summoning Interface</h4>
                 <div align="center">
                     <img src = "https://etrizzo.github.io/UI.gif" align="center">
                 </div>
@@ -176,9 +207,13 @@
                 <p>As with any tower defense game, it was important to us that players be able to understand how to summon demons intuitively. Players can tap on the tile they want to interact with, and a menu surrounding the tile will appear. On an empty tile, players can choose to summon 3 different demons, and on an existing demon, players can choose to rotate or sell the demon. It was also important to us that players not be punished for accidental taps – the UI is easy to exit either by tapping away from the UI, or clicking the exit button. We wanted the process of summoning to be fairly simple and straightforward – the player should not have to navigate complicated UI. They only have to tap on the tile, tap on the demon they wish to build, and choose the demons orientation.  </p>
                 <p>Due to the top-down view of the map, we wanted to make sure that the character of each demon and neighbor would be conveyed, and decided to include our character designs in the side panel. When a demon is about to be built or tapped on, information about the demon will appear in the side panel, along with a portrait of the demon being summoned. This adds a lot of personality to the game, and provides players with information about they need about the different demons.</p>
 
+                <br>
+                <a href="#top"> Back To Top</a>
+                <br>
+                
 
                 <hr>
-                <h4>Tutorial</h4>
+                <h4 id="tutorialsection">Tutorial</h4>
                 <div align="center">
                     <img src = "https://etrizzo.github.io/tutorial.gif" align="center">
                 </div>
