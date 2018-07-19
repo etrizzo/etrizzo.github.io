@@ -57,10 +57,13 @@
                 <img class="img-responsive" src="http://placehold.it/750x500" alt=""> 
             </div>-->
 
-            <img src="https://etrizzo.github.io/FeatureImage.png" width="100%" height="700px" scrolling="no" style="border:0px #000000 none;" name="UNWelcome" align="center">
+            <img src="https://etrizzo.github.io/images/adventure/villagers.png" width="100%" height="700px" scrolling="no" style="border:0px #000000 none;" name="UNWelcome" align="center">
                 <h3>About Game</h3>
-                <p>This game is really cool.</p>
-                <p>This is how i developed it.</p>
+                <p>Adventure is a 2D roguelike, complete with procedurally generated maps, perma-death, a quest system, and a party system. Originally, this project was assigned over 5 weeks in my first software development class at Guildhall. I later decided to take the game further by continuing development over an 8-week directed focus study, and during my own time outside of class. My goal with development was to move beyond the standard roguelike formula, and give the player a sense of growth from quest to quest. I worked to achieve this by developing my map generation system, and modeling gameplay after my favorite arc in the popular Dungeons and Dragons podcast “The Adventure Zone.” The breadth of this project allowed me to explore many areas of interest for me – including procedural generation, AI, UI, and system design - and will continue to be a great project to return to and polish into a finished game.</p>
+                <p>
+                In adventure, the player spawns into a large map, filled with both friendly and hostile entities. The player must explore the map to complete a main quest, which will bring them to the next encounter. But, the player can spend more time searching to complete side quests, to grant them more equipment, stats, and even new party members. As the player moves through encounters, the maps get progressively harder, with more and more high-level enemies spawning. The player must survive through as many encounters as possible, until their entire party dies out.
+                </p>
+
 
 
                 <div class="container">
@@ -68,18 +71,16 @@
                         <div class="col-sm-6">
                             <h3>Specs</h3>
                             <ul>
-                                <li>Engine: <b>Unity 5</b></li>
-                                <li>Language: <b>C#</b></li>
-                                <li>Team size: <b>5</b></li>
+                                <li>Engine: <b>Personal</b></li>
+                                <li>Language: <b>C++</b></li>
                             </ul>
                         </div>
                         <div class="col-sm-6">
                             <h3>Features</h3>
                             <ul>
-                                <li><a href="#demonsection">Demon towers</a></li>
-                                <li><a href="#combosection">Demon Combinations</a></li>
-                                <li><a href="#summoningsection">Summoning Interface</a></li>
-                                <li><a href="#tutorialsection">Tutorial Level</a></li>
+                                <li><a href="#mapsection">Map Generation</a></li>
+                                <li><a href="#questsection">Quest System</a></li>
+                                <li><a href="#partysection">Party System</a></li>
                             </ul>
                         </div>
                     </div>
@@ -103,9 +104,63 @@
 
                 <h3>Game Features</h3>
                 <hr>
+                <h4 id="mapsection">Map Generation</h4>
+                <div align="center">
+                     <center><img src = "https://etrizzo.github.io/images/adventure/map_generation.PNG" align="center" width="100%"></center>
+                </div>
+                <br>
+                <p>
+                    Maps in Adventure are generated through a sequence of generation steps, defined in data. For this system, I implemented a large number of generation step types, which, when used in tandem, can create exciting, organic 2D maps. To expand on this system, I added a masking system, which allowed generation steps to be run on a sub-area of the main map. These subareas can be defined as rectangles, circles, or perlin noise ranges. This system is extremely buildable – I can easily add new generation steps, and quickly see results on the screen. 
+                </p>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Generation Step</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Mutate</td>
+                            <td>Checks every tile, and has a random chance to change tile to a defined type (if that tile meets the parameters) </td>
+                        </tr>
+                        <tr>
+                            <td>FillAndEdge</td>
+                            <td>Fills the area with one tile type, and edges it with another </td>
+                        </tr>
+                        <tr>
+                            <td>CellularAutomata</td>
+                            <td>Changes a tile based on its neighbors.  </td>
+                        </tr>
+                        <tr>
+                            <td>SpawnItem, SpawnActor, Spawn Decoration</td>
+                            <td>Adds entities to the map. Can specify what kind of tiles to spawn on, or which tags the entity can or cannot spawn on. </td>
+                        </tr>
+                        <tr>
+                            <td>RoomAndPath</td>
+                            <td>Creates rooms, and generates paths between them. Can modify how many rooms, how many times rooms can overlap, how straight the paths should be, how large the rooms are, and what tiles the rooms/paths are made of. Useful for creating man-made looking structures like villages.  </td>
+                        </tr>
+                        <tr>
+                            <td>FromFile</td>
+                            <td>Loads an image from file, and parses it as tiles, using the tiles defined chromakey. </td>
+                        </tr>
+                        <tr>
+                            <td>SetSubArea</td>
+                            <td>Sets a subarea for all generation steps beneath it. </td>
+                        </tr>
+                        <tr>
+                            <td>EndSubArea</td>
+                            <td>Returns the subarea to the current subarea’s parent subarea. </td>
+                        </tr>
+                        <tr>
+                            <td>Submap</td>
+                            <td>Runs all map generation steps from another defined map. Can be used in a subarea to generate a small map within a much larger map.</td>
+                        </tr>
+                    </tbody>
+                </table>
 
 <!-- Game Feature Template -->
-                <h4 id="tutorialsection">Quest System</h4>
+                <h4 id="questsection">Quest System</h4>
                 <div align="center">
                      <center><img src = "https://etrizzo.github.io/images/adventure/quest_start.PNG" align="center" width="100%"></center>
                 </div>
@@ -134,7 +189,7 @@
 
 
                 <hr>
-                <h4 id="demonsection">Party System</h4> 
+                <h4 id="partysection">Party System</h4> 
                 <div align="center">
                     <img src = "https://etrizzo.github.io/images/adventure/ally_gameplay.gif" align="center" width="100%">
                 </div>
@@ -166,6 +221,26 @@
                 </div>
 
             </div>
+
+
+            <h3>Future Plans</h3>
+                <div class="container-fluid">
+                    <p>
+                    Adventure is a broad game, and has lots of room to grow. I plan on continuing to work on it throughout my time at guildhall, eventually polishing it into a finished game. In the immediate feature, I'm looking to accomplish the following tasks:
+                    <ul>
+                        <li>Save system</li>
+                        <li>Melee combat</li>
+                        <li>Character creation</li>
+                        <li>Ally backstort generation</li>
+                        <li>Timed encounters</li>
+                        <li>Tutorial level</li>
+                        <li>Thematic elements</li>
+                    </p>
+
+                    <p>
+                        My final vision for adventure is a rogue-like game modeled after the "Stolen Century" arc in the popular dungeons and dragons podcast, "The Adventure Zone." In the arc, the players are pulled between parallel universes by a mysterious power, and are constantly pursued by an evil, enigmatic force hunting for that power. In Adventure, I will try to foster that sense of mystery by bringing the player into a new world in each encounter, each with its own characters and quests to explore. I believe that a stronger main arc for each encounter (i.e., timed encounters, a "homebase" for the player in each world, etc.) would add greatly to the player experience in adventure.
+                    </p>
+                </div>
 
 
 
