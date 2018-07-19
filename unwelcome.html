@@ -30,9 +30,10 @@
 
 <!-- Navigation -->
 <div id="nav"></div>
-<div class="unwelcome-bg">
+
 
     <!-- Page Content -->
+<div class="unwelcome-bg">
     <div class="container" >
         <div class="content">
 
@@ -107,7 +108,7 @@
                 <p>Demons all follow a common structure: They have an array of activation tiles (tiles that they can fire on), and a tile that they push to. These variables are determined upon placement/rotation, depending on the specific type of demon. When a demon fires, all neighbors in the range are set to move to the target tile, and given special flags to determine how they are moving. After a demon fires, it will go on cooldown for some number of "steps" that the neighbors take, dependent on the type of demon. I chose to structure demons this way to give me the most flexibility in terms of demon mechanics, and to give my level designers some flexibility in balancing ranges and cooldowns by exposing these variables.</p>
                 <br>
 
-                <div class="container">
+                <div class="container-fluid">
                 <div class = "col-sm-3" style="width:33%;">
                 <h4>Baphomet - Push Demon</h4>
 

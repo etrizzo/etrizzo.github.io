@@ -105,16 +105,74 @@
                 <hr>
 
 <!-- Game Feature Template -->
-                <h4 id="tutorialsection">Tutorial</h4>
+                <h4 id="tutorialsection">Quest System</h4>
                 <div align="center">
-                    <img src = "https://etrizzo.github.io/tutorial.gif" align="center">
+                    <img src = "https://etrizzo.github.io/images/adventure/quest_start.png" align="center">
                 </div>
                 <br>
-                <p>CONTENT GOES HERE LOL</p>
+                <p>It was important to me to add a robust quest system to the game, to really get the feel of an RPG. The game has both main quests and side quests, where completing the main quest will progress the player to the next encounter, and completing side quests will grant the player various rewards, if completed. Quests have 3 components: Quest steps, Quest giver, and Quest Reward.</p>
+                 <img src = "https://etrizzo.github.io/images/adventure/check_quest.png" align="center">
+                 <div align="center"> Quest.cpp: quest checks for completion every frame </div>
+                 <br>
+                <p>
+                    The quest steps are a series of conditions, which are updated every frame. These conditions can be killing a specified actor type, collecting an item, or speaking to an actor. Every frame, the game checks if any active quest steps have been completed, and advances the quest if they have. Once all steps have been finished in a quest, the quest reward is distributed. Quest steps, called “VictoryConditions” in code, are a pure virtual class, and all of the unique quest functionalities inherit from that class. 
+                </p>
+
+                <p>
+                    The Quest Giver is how the quest is started – now, the quest giver is either “none” (the player starts with the quest information) or an actor of a specified type. If the quest giver is an actor, the map will spawn an actor of that type on the map, and assign the quest to that actor. The player can then talk to the actor to learn more about the quest, and progress the quest.
+                </p>
+                  <img src = "https://etrizzo.github.io/images/adventure/quest_reward.png" align="center">
+                  <div align="center"> QuestReward.hpp: virtual class where different rewards inherit and implement their functionality</div>
+                    <br>
+                <p>
+                The quest reward is a triggered once all steps in the quest have been completed. QuestReward is a pure virtual class, which individual rewards inherit from. Currently quests can award items, permanent stat increases, or party members. 
+                </p>
                 <br>
                 <a href="#top"> Back To Top</a>
                 <br>
                 <hr>
+
+
+                <hr>
+                <h4 id="demonsection">Party System</h4> 
+                <div align="center">
+                    <img src = "https://etrizzo.github.io/images/adventure/ally_gameplay.gif" align="center">
+                </div>
+                <p>In each encounter, the player can complete a special side-quest to gain an ally in their journey. Allies spawn with a quest near villages, and send the player on lengthy missions. Once you’ve completed the quest, the ally will join your party, and fight with you. The player can swap between controlling members of their party, and can equip any member of the party with equipment. </p>
+                <br>
+                PUT PARTY MEMBER SWAPPING CODE HERE :)
+                <br>
+                <p>In code, the player’s party is made up of a list of Actor entities, with a pointer to the current controlled actor, and an index for where that actor is in the array. Switching between party members is as simple as incrementing that index, and modding the result to loop through the list. The player’s inventory is shared across all party members – whenever an actor joins the party, their entire inventory is added to the party. This system allows for any number of actors to join the party, and easily distribute equipment as the player sees fit. Though, for gameplay purposes, the number of party members should be limited.</p>
+                <br>
+
+                <div class="container-fluid">
+                <div class = "col-sm-3" style="width:33%;">
+                <h4>Quest Dialogue</h4>
+
+                <img src = "https://etrizzo.github.io/images/adventure/ally_quest_dialogue.gif" name="Ally quest dialogue" align="center" width="100%">
+                 
+                <p>Allies will give the player quests to complete around the map.</p>
+                </div>
+
+
+                <div class = "col-sm-3" style="width:33%;">
+               <img src = "https://etrizzo.github.io/images/adventure/ally_joining.gif" name="Ally joining your party" align="center" width="100%">
+                 
+                <p>After allies join your party, they follow the player and can equip items.</p>
+                    <ul align="left">
+                        <li>Range: 3 tiles</li>
+                        <li>Activation range: 1 tile</li>
+                        <li>Cooldown: 6 steps</li>
+                    </ul>
+                </div>
+
+                <div class = "col-sm-3" style="width:33%;">
+               <img src = "https://etrizzo.github.io/images/adventure/ally_combat.gif" name="Ally fighting alongside you" align="center" width="100%">
+                 
+                <p>Allies will fight alongside you, and can die if you aren't careful.</p>
+                </div>
+
+            </div>
 
 
 
