@@ -116,7 +116,18 @@
                 <div class = "col-sm-3" style="width:33%;">
                 <h4>Baphomet - Push Demon</h4>
 
-                <img src = "https://etrizzo.github.io/pushDemon.gif" name="Push Demon" align="center" width="100%">
+                <a href="#" data-toggle="modal" data-target="#pushModal" ><img src = "https://etrizzo.github.io/pushDemon.gif" name="Push Demon" align="center" width="100%"></a>
+                <div id="pushModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                          <div class="modal-body">
+                            <img src = "https://etrizzo.github.io/pushDemon.gif" name="Push Demon" width="100%">
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
                  
                 <p>Baphomet pushes all neighbors on the tile in front of their sigil in a straight line, up to 5 tiles. Baphomet is the most basic demon, and is used simply to move neighbors across the room. If there is any furniture in baphomet's path, neighbors will be stop on the tile before the obstacle.</p>
                     <ul align="left">
@@ -129,7 +140,18 @@
 
                 <div class = "col-sm-3" style="width:33%;">
                 <h4>Maalik - Spring Demon</h4>
-               <img src = "https://etrizzo.github.io/springDemon.gif" name="Spring Demon" align="center" width="100%">
+               <a href="#" data-toggle="modal" data-target="#springModal" ><img src = "https://etrizzo.github.io/springDemon.gif" name="Spring Demon" align="center" width="100%"> </a>
+               <div id="springModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                          <div class="modal-body">
+                            <img src = "https://etrizzo.github.io/springDemon.gif" name="Spring Demon" width="100%">
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
                  
                 <p>Maalik springs all neighbors on the tile in front of his sigil over a 1-tile-wide obstacle in front of him. Maalik can be used to move neighbors over furniture, giving the player more space to set up combinations. Maalik has a very short range, and is used best in combination with other demons.</p>
                     <ul align="left">
@@ -141,7 +163,20 @@
 
                 <div class = "col-sm-3" style="width:33%;">
                 <h4>Tamamanomae - Attraction Demon</h4>
-               <img src = "https://etrizzo.github.io/pullDemon.gif" name="Attraction Demon" align="center" width="100%">
+               <a href="#" data-toggle="modal" data-target="#pullModal" ><img src = "https://etrizzo.github.io/pullDemon.gif" name="Attraction Demon" align="center" width="100%" ></a>
+
+                <div id="pullModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                          <div class="modal-body">
+                            <img src = "https://etrizzo.github.io/pullDemon.gif" name="Attraction Demon" width="100%">
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+               
                  
                 <p>Tamamanomae attracts all neighbors in her range to the tile her sigil is on. Tamamanomae is used to pull neighbors off their path, or to cluster groups of neighbors onto the same tile, which can be used to set up combinations with the Maalik and Baphomet. Tamanomae can not pull through furniture, but if placed on top of furniture will pull neighbors as close as she can.</p>
                     <ul align="left">
@@ -300,6 +335,7 @@
             $("#nav").load("nav.html");
         });
     </script> 
+
 
 </body>
 
