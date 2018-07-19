@@ -23,7 +23,7 @@ footer {
 
 }
 
-.unwelcome-bg, .bgimg-2, .bgimg-3 {
+.unwelcome-bg, .adventure-bg, .bgimg-3 {
   position: relative;
   background-color: rgba(255,255,255,0.5);
   background-attachment: fixed;
@@ -38,8 +38,8 @@ footer {
   min-height: 100%;
 }
 
-.bgimg-2 {
-  background-image: url("img_parallax2.jpg");
+.adventure-bg {
+  background-image: url("https://etrizzo.github.io/images/adventure/map_gen_2.png");
   min-height: 400px;
 }
 
