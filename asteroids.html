@@ -32,7 +32,7 @@
    <div id="nav"></div>
 
     <!-- Page Content -->
-<div class="unwelcome-bg">
+<div class="asteroids-bg">
     <div class="container" >
         <div class="content">
 
@@ -57,10 +57,10 @@
                 <img class="img-responsive" src="http://placehold.it/750x500" alt=""> 
             </div>-->
 
-            <img src="https://etrizzo.github.io/FeatureImage.png" width="100%" height="700px" scrolling="no" style="border:0px #000000 none;" name="UNWelcome" align="center">
-                <h3>About Game</h3>
-                <p>This game is really cool.</p>
-                <p>This is how i developed it.</p>
+            <img src="https://etrizzo.github.io/images/asteroids/asteroids_splash.png" width="100%" height="700px" scrolling="no" style="border:0px #000000 none;" name="UNWelcome" align="center">
+                <h3>About Asteroids</h3>
+                <p>Asteroids was the first project I created in my personal engine, and my first real project using C++. In the context of my coursework at guildhall, it served as a great way to explore new technologies and carve out the basic framework of my engine in a few short weeks. But my biggest takeaway for asteroids is the importance of juice, and a passion for the work that you're doing.</p>
+                <p> During the time that we were developing asteroids in-class, I enjoyed exploring ways to make the game feel unique even though we were limited to untextured lines for drawing. Even though it's a simple game to implement, I had so much fun creating asteroids that I chose to go back and continue polishing it much later, with some of the new features I had added to my engine.</p>
 
 
                 <div class="container">
@@ -68,18 +68,18 @@
                         <div class="col-sm-6">
                             <h3>Specs</h3>
                             <ul>
-                                <li>Engine: <b>Unity 5</b></li>
-                                <li>Language: <b>C#</b></li>
-                                <li>Team size: <b>5</b></li>
+                                <li>Engine: <b>Personal Engine</b></li>
+                                <li>Language: <b>C++, OpenGL</b></li>
                             </ul>
                         </div>
                         <div class="col-sm-6">
                             <h3>Features</h3>
                             <ul>
-                                <li><a href="#demonsection">Demon towers</a></li>
-                                <li><a href="#combosection">Demon Combinations</a></li>
-                                <li><a href="#summoningsection">Summoning Interface</a></li>
-                                <li><a href="#tutorialsection">Tutorial Level</a></li>
+                                <li><a href="#starsection">Starfield</a></li>
+                                <li><a href="#facesection">Faces</a></li>
+                                <!--
+                                <li><a href="#chargesection">Charge Shot</a></li>
+                            -->
                             </ul>
                         </div>
                     </div>
@@ -88,24 +88,64 @@
 
                 <br>
                 <hr>
+                <!--
                 <h3> Downloads </h3>
-                        <a href="https://etrizzo.github.io/UNWelcome_LAUNCH.zip"><button type="button" class="btn btn-primary">
+                        <a href="#"><button type="button" class="btn btn-primary">
                            Download APK
                         </button></a>
 
                         <button type="button" class="btn btn-primary">
                            (.EXE download coming soon)
                         </button>
-
+            
                 <br>
+            -->
                 <br>
 
-
+    
                 <h3>Game Features</h3>
                 <hr>
 
 <!-- Game Feature Template -->
-                <h4 id="tutorialsection">Tutorial</h4>
+                <h4 id="starsection">Starfield</h4>
+                <div align="center">
+                    <img src = "https://etrizzo.github.io/images/asteroids/asteroids_stars.gif" align="center">
+                </div>
+                <br>
+                <p>After my first semester at Guildhall, I decided to go back to asteroids, and improve it using everything I had learned. Though my engine had gained many rendering features, I wanted to stick to the untextured line aesthetic from the original asteroids. I chose to create a dynamic galaxy-like background, composed of hundreds of polygonal stars. The effect drastically improves the overall look of asteroids, and was a good investigation of how I can use perlin noise in a variety of different ways.</p>
+                
+                <center><img src = "https://etrizzo.github.io/images/asteroids/addstars.PNG" align="center"></center>
+                  <div align="center"> Game.cpp: Every frame, each tile on the screen has a chance to spawn a star based on perlin noise.</div>
+                    <br>
+                <p>
+                The starfield is generated by first establishing a grid for the entire screen. These coordinates for these tiles are used to calculate perlin noise for that reason. I used 3D perlin noise for this, with x and y being the respective coordinates of the tile, and z being gametime to get a moving galaxy effect. If the perlin noise value for the tile is high enough, that tile has a chance to spawn a star that frame. 
+                </p>
+                <p>
+                In order to cluster stars in higher noise-value tiles, I squared the 0-to-1 mapped perlin noise value as the random chance that was being checked. This makes it much less likely, but still possible, to spawn stars in areas that barely make the perlin noise threshold, but far more likely in the peak of the noise range. When a star is spawned, it's size, shape, rotation, and color are all randomly selected. I decided to drive the random selection of size and opacity with the same range-mapped perlin noise value that determines the chance to spawn. This led to larger stars appearing in the high-noise areas, while the low-noise areas were mostly small specks. 
+                </p>
+                <p>
+                I also decided to tint the background using time-based perlin noise, to continue to explore that deep-space, galaxy-like aesthetic. In the end, I created random color functions to generate dark-blueish-green hues based on perlin noise values, which were driven by time. I then tinted 4 corners of a quad with these randomly generated colors, which led to a smooth shifting background color. 
+                </p>
+                <br>
+                <a href="#top"> Back To Top</a>
+                <br>
+                <hr>
+
+                <h4 id="facesection">Faces</h4>
+                <div align="center">
+                    <img src = "https://etrizzo.github.io/images/asteroids/asteroids_faces.gif" align="center">
+                </div>
+                <br>
+                <p>After finishing the base asteroids game, I chose to add some "juice" features, to make the game feel more unique to me. With the tools available to me in my brand new engine, I decided to put cute faces on the asteroids. </p>
+                <p>
+                As asteroids get broken apart, they spawn smaller, more upset asteroids, until the player destroys them entirely. In the context of this game, this required three different faces to be drawn - happy, sad, and angry. In order to make the faces feel good, I wanted to experiment with time, and randomness. To get the glistening effect on the happy asteroid's eye, I chose a random size/translation for the eye highlight each frame. For the crying asteroid's tears, I used a simple sin-wave to construct a wavy mesh, and passed in time as the x coordinate. These are both simple mathematical problems, but the value that they added to the faces was incredible. These elements really made me appreciate the importance of simple, effective juice in games.
+                </p>
+                <br>
+                <a href="#top"> Back To Top</a>
+                <br>
+                <hr>
+<!--
+                <h4 id="chargesection">Tutorial</h4>
                 <div align="center">
                     <img src = "https://etrizzo.github.io/tutorial.gif" align="center">
                 </div>
@@ -115,7 +155,7 @@
                 <a href="#top"> Back To Top</a>
                 <br>
                 <hr>
-
+-->
 
 
         <!-- /.row -->

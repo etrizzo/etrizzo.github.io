@@ -26,7 +26,7 @@ footer {
 
 }
 
-.unwelcome-bg, .adventure-bg, .irl-bg {
+.unwelcome-bg, .adventure-bg, .irl-bg, .asteroids-bg {
   position: relative;
   background-color: rgba(255,255,255,0.5);
   background-attachment: fixed;
@@ -48,5 +48,10 @@ footer {
 
 .irl-bg {
   background-image: url("https://etrizzo.github.io/images/irl/MainMenu_Splash.png");
+  min-height: 400px;
+}
+
+.asteroids-bg {
+  background-image: url("https://etrizzo.github.io/images/asteroids/asteroids_splash.png");
   min-height: 400px;
 }
