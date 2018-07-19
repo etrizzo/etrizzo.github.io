@@ -32,7 +32,7 @@
    <div id="nav"></div>
 
     <!-- Page Content -->
-<div class="unwelcome-bg">
+<div class="irl-bg">
     <div class="container" >
         <div class="content">
 
@@ -57,11 +57,14 @@
             </div>
 <!--
             <img src="https://etrizzo.github.io/FeatureImage.png" width="100%" height="700px" scrolling="no" style="border:0px #000000 none;" name="UNWelcome" align="center"> -->
-                <h3>About Game</h3>
-                <p>This game is really cool.</p>
-                <p>This is how i developed it.</p>
+                <h3>About Interstellar Racing League</h3>
+                <p>Interstellar Racing League is a high-speed, racing experience, which supports up to 4 players in local splitscreen. Players race along gravity-defying tracks through alien planets to compete for the title of the Galaxy’s Best Racer.</p>
+                <p>Interstellar racing league was developed over the course of 4 months on a team of 56 people, using Unreal Engine 4.17. On this project, I worked on the UI team, alongside one artist and one UX lead. Together, we developed all menus and UI in the final game.</p>
 
-
+                <h3>My Role</h3>
+                <p>
+                    As the only programmer on the UI team, I was in charge of the system design and implementation of all menus and HUD elements in the game. I also had to work closely with the UI artist and my lead to assure that all UI elements were conveying correctly in-game, and met stakeholder standards.
+                </p>
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-6">
@@ -69,7 +72,7 @@
                             <ul>
                                 <li>Engine: <b>Unreal Engine 4</b></li>
                                 <li>Language: <b>Blueprint</b></li>
-                                <li>Team size: <b>60</b></li>
+                                <li>Team size: <b>56</b></li>
                             </ul>
                         </div>
                         <div class="col-sm-6">
@@ -102,21 +105,27 @@
 <!-- Game Feature Template -->
                 <h4 id="menusection">Main Menu System</h4>
                 <div align="center">
-                    <img src = "https://etrizzo.github.io/tutorial.gif" align="center">
+                    <img src = "https://etrizzo.github.io/images/irl/menu_system.gif" align="center"  width="100%">
                 </div>
                 <br>
-                <p>CONTENT GOES HERE LOL</p>
+                <p>This project required a fully fleshed out menu system with multiplayer and singleplayer capabilities, character selection, track selection, resolution options, audio options, and the ability to change control schemes. This system was large and complex, and required constant maintenance to make sure that it was quick and elegant for the players to use.</p>
+                <br>
+                INSERT MAIN MENU STATE MACHINE HERE
+                <br>
+                <p>
+                    Developed using blueprint and Unreal's UMG widget sytem, the menu system consisted of several sub-menus (options, character select, track select, etc.) which could be navigated easily and seamlessly. To do this, I implemented each individual menu’s functionality into a separate widget blueprint, and consolidated each widget into a single “Main Menu” widget which controlled swapping between menus and managed the overall game state. This system allowed developers to work on individual menus independently, while still keeping the overall functionality consolidated into one place.
+                </p>
                 <br>
                 <a href="#top"> Back To Top</a>
                 <br>
                 <hr>
 
                  <h4 id="characterselectsection">Multiplayer Character Select Menu</h4>
-                <div align="center">
-                    <img src = "https://etrizzo.github.io/tutorial.gif" align="center">
+                <div align="center"  width="100%">
+                    <img src = "https://etrizzo.github.io/images/irl/character_select.gif" align="center"  width="100%">
                 </div>
                 <br>
-                <p>CONTENT GOES HERE LOL</p>
+                <p>The character select screen required that multiple players to be able to navigate the menu independently and simultaneously, similar to other couch co-op menu systems such as Mario Kart or Super Smash Brothers. This required some design on the PlayerController blueprint for the main menu, which would keep track of the player’s current character selection, and whether or not that had made their final selection. This state needed to be clearly conveyed to the player as well, with independent cursors and “hover” states for character images.</p>
                 <br>
                 <a href="#top"> Back To Top</a>
                 <br>
@@ -124,10 +133,11 @@
 
                  <h4 id="hudsection">Multiplayer HUD</h4>
                 <div align="center">
-                    <img src = "https://etrizzo.github.io/tutorial.gif" align="center">
+                    <img src = "https://image.freepik.com/free-vector/geometric-background-with-text-of-coming-soon_1017-5069.jpg" align="center"  width="100%">
                 </div>
                 <br>
-                <p>CONTENT GOES HERE LOL</p>
+                <p>This project required the HUD to display information about the player’s place, current lap, and powerups, as well as broader race information such as a minimap, indicators for approaching vehicles, and player icons over enemy players. This system had to be designed with split-screen in mind - a single HUD blueprint couldn't be stretched onto the 2-player screen without comprimising the user experience. To address this, we developed 3 different HUDs, which took into account the screen layouts for single player, two player, and three/four player modes. Upon loading into a level, the game instance identifies how many players are in the game, and sets up the hud appropriately.</p>
+
                 <br>
                 <a href="#top"> Back To Top</a>
                 <br>
@@ -135,10 +145,16 @@
 
                  <h4 id="iconsection">Player Icons</h4>
                 <div align="center">
-                    <img src = "https://etrizzo.github.io/tutorial.gif" align="center">
+                    <img src = "https://etrizzo.github.io/images/irl/player_icons.jpg" align="center" width="100%">
                 </div>
                 <br>
-                <p>CONTENT GOES HERE LOL</p>
+                <p>In any racing game, the player needs to be able to quickly identify other players and CPUs, and gauge where they were in the race. In order to do this, we chose to implement icons over surrounding players, and proximity indicators which appear when a car is approaching the player from behind. </p>
+                <p>
+                    For the player icons, each human player’s HUD required up to 7 player icons on screen, which tracked an enemy player whenever it was on screen, and disappeared when it was not on screen, or was too far away to be relevant to the player. To implement this, I added a set of 7 icons to the screen, and gave each icon an enemy car to “track”. While the target car was visible and within a set range of the player (determined by designers), the icon would update its screen position to be above the car’s screen position, and hide itself if those conditions were not met.
+                </p>
+                <p>
+                    For the proximity indicators, each car needed in-world indicators, which would become visible when cars approaching from behind got close. When a car met this criteria, the indicator would rotate to “point” at the approaching car, so that the player could make quick decisions to avoid collisions. 
+                </p>
                 <br>
                 <a href="#top"> Back To Top</a>
                 <br>
