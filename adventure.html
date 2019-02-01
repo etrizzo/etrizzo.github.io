@@ -57,7 +57,7 @@
                 <img class="img-responsive" src="http://placehold.it/750x500" alt=""> 
             </div>-->
 
-            <img src="https://etrizzo.github.io/images/adventure/villagers2.png" width="100%" scrolling="no" style="border:0px #000000 none;" name="UNWelcome" align="center">
+            <img src="https://etrizzo.github.io/images/adventure/villagers3.png" width="100%" scrolling="no" style="border:0px #000000 none;" name="Adventure" align="center">
                 <h3>About Game</h3>
                 <p>Adventure is a 2D roguelike, complete with procedurally generated maps, perma-death, a quest system, and a party system. Originally, this project was assigned over 5 weeks in my first software development class at Guildhall. I later decided to take the game further by continuing development over an 8-week directed focus study, and during my own time outside of class. My goal with development was to move beyond the standard roguelike formula, and give the player a sense of growth from quest to quest. I worked to achieve this by developing my map generation system, and modeling gameplay after my favorite arc in the popular Dungeons and Dragons podcast “The Adventure Zone.” The breadth of this project allowed me to explore many areas of interest for me – including procedural generation, AI, UI, and system design - and will continue to be a great project to return to and polish into a finished game.</p>
                 <p>
@@ -79,6 +79,7 @@
                             <h3>Features</h3>
                             <ul>
                                 <li><a href="#mapsection">Map Generation</a></li>
+                                <li><a href="#edgeSection">Organic Tile Edges</a></li>
                                 <li><a href="#questsection">Quest System</a></li>
                                 <li><a href="#partysection">Party System</a></li>
                             </ul>
@@ -160,6 +161,104 @@
                     </tbody>
                 </table>
 
+
+
+                <hr>
+                <h4 id="edgeSection">Organic Tile Edges</h4> 
+                <div align="center">
+                    <img src = "https://etrizzo.github.io/images/adventure/edge3_step6" align="center" width="100%">
+                </div>
+                <p>As I worked on the map generation more, I found that the maps were starting to look ~really good~ when I was zoomed out and looking at the entire map. But on the actual game screen, while walking around, they still looked very unpolished, because of the harsh edges between tiles. The Liberated Pixel Cup tileset that I was using came with an incomplete set of cosmetic edge tiles for most tile types, so I decided to add a pass after map generation to add these cosmetic overlays appropriately to the procedural terrain.</p>
+               <center><img src = "https://etrizzo.github.io/images/adventure/tilesheet.png" align="center" width="100%"></center>
+                  <div align="center">Liberated Pixel Cup tileset</div>
+                <p>Conceptually, this is just a very specific cellular automata problem. However, because this tileset was missing an edge for every configuration (for instance, a grass tile with only one neighboring grass tile), I couldn't just set the rule for every configuration - there would definitely be invalid tiles on the map, and I'd have to deal with them somehow.. Additionally, I needed a way to determine which edge to place between tile types - should the grass edge go on the sand tile, or should the sand edge go on the grass tile? What about areas where three different tile types meet on one space?</p>
+                <br>
+                <p>
+                    The first step is to establish what kind of edge a tile should have on it. In data, I defined a terrain height for all terrain tiles, and use that to determine which direction an edge should "flow". So now I could know in data, that between grass and sand, grass edges should go on top of sand tiles. Now, for each tile, I can look at the neighboring tiles, and establish what higher-level edge is most common to determine the edge type. Once I know what kind of edge to place, I can look at a set of rules to determine which edge should be placed - or at least, which one is most suitable.
+                </p>
+                
+                <center><img src = "https://etrizzo.github.io/images/adventure/TileDefinition.png" align="center" width="100%"></center>
+                  <div align="center">TileDefinition.xml: Determines which layer a tile should be in, and the height of the terrain. Note that both Grass and Flower tiles point to the Grass edge definition - while flowers are cosmetically different and could easily have different affects in game, they should still be treated like grass for the purpose of placing these edges.</div>
+
+                <p>
+                    Now that I could find an edge to place, I had to plan for situations where there was no clear, single answer for the best edge. I decided to prioritize by the type of terrain, and have a separate sprite layer for each type - edges between ground and water/lava should be highest priority, because there is a gameplay difference between water and ground. After that, it looked best to have the grass layer be on top of any other terrain, regardless of whether it was sand or dirt. The third layer are all of the low priority edges between different types of dirt or sand - nothing necessarily looks out of place if these layers are swapped around, and small inaccuracies in the placement of edges in this layer are pretty unnoticable. To try and minimize this slim chance of strange looking tiles, I decided to add an initial pass to clear invalid configurations, so that the map started out as clean as possible.
+                </p>
+                <p>
+                    So, my pass for edging tiles ended up looking like this:
+                    <ul>
+                        <li>Clear Invalid Tiles</li>
+                        <li>Add "Tufts" where there are single high-level tiles entirely surrounded by lower-level tiles. (i.e., a single patch of grass)</li>
+                        <li>Add Ground Layer->Water Layer and Ground Layer->Lava Layer edges</li>
+                        <li>Add Grass Layer->Earth Layer edges</li>
+                        <li>Add Earth Layer->Earth Layer edges according to terrain height</li>
+                    </ul>
+                    While there are still a few tiles in every map that look a little off, the benefit of having a procedurally generated world that actually looks smooth and organic is well worth it.
+                </p>
+
+                <div id="edgeCarousel" class="carousel" data-ride="carousel" data-interval="false">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#edgeCarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#edgeCarousel" data-slide-to="1"></li>
+                        <li data-target="#edgeCarousel" data-slide-to="2"></li>
+                        <li data-target="#edgeCarousel" data-slide-to="3"></li>
+                        <li data-target="#edgeCarousel" data-slide-to="4"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <!-- Set the first background image using inline CSS below. -->
+                            <img src="https://etrizzo.github.io/images/adventure/edge3_step2.PNG" width="100%" />
+                            <div class="carousel-caption">
+                                <h3>Starting map</h3>
+                            </div></a>
+                        </div>
+                        <div class="item">
+                            <!-- Set the first background image using inline CSS below. -->
+                            <img src="https://etrizzo.github.io/images/adventure/edge3_step3.PNG" width="100%" />
+                            <div class="carousel-caption">
+                                <h3>Cleanup</h3>
+                                Remove invalid tiles and add "tufts"
+                            </div></a>
+                        </div>
+                        <div class="item">
+                            <!-- Set the first background image using inline CSS below. -->
+                            <img src="https://etrizzo.github.io/images/adventure/edge3_step4.PNG" width="100%" />
+                            <div class="carousel-caption">
+                                <h3>High priority edges</h3> 
+                                Edge from Ground Layer to Shore Layer
+                            </div></a>
+                        </div>
+                        <div class="item">
+                            <!-- Set the first background image using inline CSS below. -->
+                            <img src="https://etrizzo.github.io/images/adventure/edge3_step5.PNG" width="100%" />
+                            <div class="carousel-caption">
+                                <h3>Medium priority edges</h3> 
+                                Edge from Grass Layer to Earth Layer
+                            </div></a>
+                        </div>
+                        <div class="item">
+                            <!-- Set the first background image using inline CSS below. -->
+                            <img src="https://etrizzo.github.io/images/adventure/edge3_step6.PNG" width="100%" />
+                            <div class="carousel-caption">
+                                <h3>Low priority edges</h3>
+                                 Edge from light dirt to dark dirt, dirt to sand, etc. Done!
+                            </div></a>
+                        </div>
+                    </div>
+
+
+                    <!-- Controls -->
+                    <a class="left carousel-control" href="#edgeCarousel" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                        <span class="sr-only">Previous Step</span>
+                    </a>
+                    <a class="right carousel-control" href="#edgeCarousel" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                        <span class="sr-only">Next Step</span>
+                    </a>
+                </div>
+                <div align="center"> Adding edges: click left and right to step through the edging process for the maps.</div>
+
                 <hr>
 
 <!-- Game Feature Template -->
@@ -169,7 +268,7 @@
                 </div>
                 <br>
                 <p>It was important to me to add a robust quest system to the game, to really get the feel of an RPG. The game has both main quests and side quests, where completing the main quest will progress the player to the next encounter, and completing side quests will grant the player various rewards, if completed. Quests have 3 components: Quest steps, Quest giver, and Quest Reward.</p>
-                 <center> <img src = "https://etrizzo.github.io/images/adventure/check_quest.PNG"></center>
+                 <center> <img src = "https://etrizzo.github.io/images/adventure/check_quest.PNG" align="center" width="100%"></center>
                  <div align="center"> Quest.cpp: quest checks for completion every frame </div>
                  <br>
                 <p>
@@ -179,7 +278,7 @@
                 <p>
                     The Quest Giver is how the quest is started – now, the quest giver is either “none” (the player starts with the quest information) or an actor of a specified type. If the quest giver is an actor, the map will spawn an actor of that type on the map, and assign the quest to that actor. The player can then talk to the actor to learn more about the quest, and progress the quest.
                 </p>
-                  <center><img src = "https://etrizzo.github.io/images/adventure/quest_reward.PNG" align="center"></center>
+                  <center><img src = "https://etrizzo.github.io/images/adventure/quest_reward.PNG" align="center" width="100%"></center>
                   <div align="center"> QuestReward.hpp: virtual class where different rewards inherit and implement their functionality</div>
                     <br>
                 <p>
@@ -196,7 +295,7 @@
                     <img src = "https://etrizzo.github.io/images/adventure/ally_gameplay.gif" align="center" width="100%">
                 </div>
                 <p>In each encounter, the player can complete a special side-quest to gain an ally in their journey. Allies spawn with a quest near villages, and send the player on lengthy missions. Once you’ve completed the quest, the ally will join your party, and fight with you. The player can swap between controlling members of their party, and can equip any member of the party with equipment. </p>
-               <center><img src = "https://etrizzo.github.io/images/adventure/party_swap.png" align="center"></center>
+               <center><img src = "https://etrizzo.github.io/images/adventure/party_swap.png" align="center" width="100%"></center>
                   <div align="center"> QuestReward.hpp: virtual class where different rewards inherit and implement their functionality</div>
                 <p>In code, the player’s party is made up of a list of Actor entities, with a pointer to the current controlled actor, and an index for where that actor is in the array. Switching between party members is as simple as incrementing that index, and modding the result to loop through the list. The player’s inventory is shared across all party members – whenever an actor joins the party, their entire inventory is added to the party. This system allows for any number of actors to join the party, and easily distribute equipment as the player sees fit. Though, for gameplay purposes, the number of party members should be limited.</p>
                 <br>
@@ -284,7 +383,7 @@
                         <li>Save system</li>
                         <li>Melee combat</li>
                         <li>Character creation</li>
-                        <li>Ally backstort generation</li>
+                        <li>Ally dialogue generation</li>
                         <li>Timed encounters</li>
                         <li>Tutorial level</li>
                         <li>Thematic elements</li>
