@@ -170,7 +170,7 @@
                 </div>
                 <p>As I worked on the map generation more, I found that the maps were starting to look ~really good~ when I was zoomed out and looking at the entire map. But on the actual game screen, while walking around, they still looked very unpolished, because of the harsh edges between tiles. The Liberated Pixel Cup tileset that I was using came with an incomplete set of cosmetic edge tiles for most tile types, so I decided to add a pass after map generation to add these cosmetic overlays appropriately to the procedural terrain.</p>
                <center><img src = "https://etrizzo.github.io/images/adventure/tilesheet.png" align="center" width="100%"></center>
-                  <div align="center">Liberated Pixel Cup tileset</div>
+                  <div align="center">Liberated Pixel Cup edge tile format</div>
                 <p>Conceptually, this is just a very specific cellular automata problem. However, because this tileset was missing an edge for every configuration (for instance, a grass tile with only one neighboring grass tile), I couldn't just set the rule for every configuration - there would definitely be invalid tiles on the map, and I'd have to deal with them somehow.. Additionally, I needed a way to determine which edge to place between tile types - should the grass edge go on the sand tile, or should the sand edge go on the grass tile? What about areas where three different tile types meet on one space?</p>
                 <br>
                 <p>
