@@ -14,8 +14,12 @@
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
+        <!-- prettyprint -->
+	<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?"></script>
+
     <!-- Custom CSS -->
     <link href="css/portfolio-item.css" rel="stylesheet">
+    <link href="css/prettyprint.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -177,9 +181,43 @@
                     The first step is to establish what kind of edge a tile should have on it. In data, I defined a terrain height for all terrain tiles, and use that to determine which direction an edge should "flow". So now I could know in data, that between grass and sand, grass edges should go on top of sand tiles. Now, for each tile, I can look at the neighboring tiles, and establish what higher-level edge is most common to determine the edge type. Once I know what kind of edge to place, I can look at a set of rules to determine which edge should be placed - or at least, which one is most suitable.
                 </p>
                 
-                <center><img src = "https://etrizzo.github.io/images/adventure/TileDefinition.png" align="center" width="100%"></center>
+<pre class="prettyprint linenums language-xml">
+&ltTileDefinition
+    name="Grass"
+    spriteCoords="6,31|7,31|7,31|8,31|8,31|8,31|8,31|8,31"
+    chromaKey ="0,255,0"
+    allowsSight="true"
+    allowsWalking="true"
+    allowsFlying="true"
+    allowsSwimming="false"
+    isTerrain="true"
+    terrainHeight="4"
+    edgeDefinition="Grass"
+    terrainLayer="Ground"
+    groundLayer="Grass"
+/&gt
+  
+&ltTileDefinition
+    name="Flowers"
+    spriteCoords="18,0|18,0|19,0"
+    chromaKey ="255,255,0"
+    allowsSight="true"
+    allowsWalking="true"
+    allowsFlying="true"
+    allowsSwimming="false"
+    isTerrain="true"
+    terrainHeight="4"
+    terrainDefinition="Grass"
+    edgeDefinition="Grass"
+    terrainLayer="Ground"
+    groundLayer="Grass"
+/&gt
+.
+.
+.
+</pre>
                   <div align="center">TileDefinition.xml: Determines which layer a tile should be in, and the height of the terrain. Note that both Grass and Flower tiles point to the Grass edge definition - while flowers are cosmetically different and could easily have different affects in game, they should still be treated like grass for the purpose of placing these edges.</div>
-
+                  <br>
                 <p>
                     Now that I could find an edge to place, I had to plan for situations where there was no clear, single answer for the best edge. I decided to prioritize by the type of terrain, and have a separate sprite layer for each type - edges between ground and water/lava should be highest priority, because there is a gameplay difference between water and ground. After that, it looked best to have the grass layer be on top of any other terrain, regardless of whether it was sand or dirt. The third layer are all of the low priority edges between different types of dirt or sand - nothing necessarily looks out of place if these layers are swapped around, and small inaccuracies in the placement of edges in this layer are pretty unnoticable. To try and minimize this slim chance of strange looking tiles, I decided to add an initial pass to clear invalid configurations, so that the map started out as clean as possible.
                 </p>
@@ -195,7 +233,8 @@
                     While there are still a few tiles in every map that look a little off, the benefit of having a procedurally generated world that actually looks smooth and organic is well worth it.
                 </p>
 
-                <div id="edgeCarousel" class="carousel" data-ride="carousel" data-interval="false">
+                <div id="edgeCarousel" class="carousel" data-ride="carousel" data-interval="false" 
+                style="background-image:-webkit-linear-gradient(top,rgba(0,0,0,.0001) 0,rgba(0,0,0,.5) 100%)">
                     <!-- Indicators -->
                     <ol class="carousel-indicators">
                         <li data-target="#edgeCarousel" data-slide-to="0" class="active"></li>
@@ -210,6 +249,7 @@
                             <img src="https://etrizzo.github.io/images/adventure/edge3_step2.PNG" width="100%" />
                             <div class="carousel-caption">
                                 <h3>Starting map</h3>
+                                Click right to see edging process
                             </div></a>
                         </div>
                         <div class="item">
@@ -248,12 +288,12 @@
 
 
                     <!-- Controls -->
-                    <a class="left carousel-control" href="#edgeCarousel" data-slide="prev">
-                        <span class="glyphicon glyphicon-chevron-left"></span>
+                    <a class="left carousel-control carousel-demonstration" href="#edgeCarousel" data-slide="prev" style="background-image:none">
+                        <span class="glyphicon glyphicon-chevron-left" style="top:90%;left:50%"></span>
                         <span class="sr-only">Previous Step</span>
                     </a>
-                    <a class="right carousel-control" href="#edgeCarousel" data-slide="next">
-                        <span class="glyphicon glyphicon-chevron-right"></span>
+                    <a class="right carousel-control carousel-demonstration" href="#edgeCarousel" data-slide="next" style="background-image:none">
+                        <span class="glyphicon glyphicon-chevron-right" style="top:90%;right:50%"></span>
                         <span class="sr-only">Next Step</span>
                     </a>
                 </div>
@@ -268,7 +308,41 @@
                 </div>
                 <br>
                 <p>It was important to me to add a robust quest system to the game, to really get the feel of an RPG. The game has both main quests and side quests, where completing the main quest will progress the player to the next encounter, and completing side quests will grant the player various rewards, if completed. Quests have 3 components: Quest steps, Quest giver, and Quest Reward.</p>
-                 <center> <img src = "https://etrizzo.github.io/images/adventure/check_quest.PNG" align="center" width="100%"></center>
+<pre class="prettyprint linenums language-cpp">
+bool Quest::UpdateAndCheckIfComplete()
+{
+    if (!m_isComplete){         //if you haven't already completed this quest, check the steps
+        bool allComplete = true;
+        for (int i = 0; i < m_conditions.size(); i++){
+            VictoryCondition* condition = m_conditions[i];
+            if (!condition->m_complete){        //if the condition has not already been completed
+                if (!condition->CheckIfComplete()){     //updates and checks for completion
+                    allComplete = false;
+                } else {
+                    if (m_questGiver != nullptr){
+                        //update the quest giver, if the quest was given by an actor.
+                        m_questGiver->AdvanceQuest();
+                    }
+                    if (m_definition->m_isSequential){
+                        //if the quest should be completed in order, unlock the next step in the quest (if there is one)
+                        if (i + 1 < m_conditions.size()){
+                            condition->m_active = false;
+                            m_conditions[i + 1]->m_active = true;
+                        }
+                    }
+                }
+            }
+        }
+
+        if (allComplete){
+            CompleteQuest();
+        }
+        return allComplete;
+    }
+    return m_isComplete;
+}
+
+</pre>
                  <div align="center"> Quest.cpp: quest checks for completion every frame </div>
                  <br>
                 <p>
@@ -278,11 +352,47 @@
                 <p>
                     The Quest Giver is how the quest is started – now, the quest giver is either “none” (the player starts with the quest information) or an actor of a specified type. If the quest giver is an actor, the map will spawn an actor of that type on the map, and assign the quest to that actor. The player can then talk to the actor to learn more about the quest, and progress the quest.
                 </p>
-                  <center><img src = "https://etrizzo.github.io/images/adventure/quest_reward.PNG" align="center" width="100%"></center>
-                  <div align="center"> QuestReward.hpp: virtual class where different rewards inherit and implement their functionality</div>
+<pre class="prettyprint linenums language-cpp">
+class QuestReward{
+public:
+    QuestReward(){};
+    QuestReward(tinyxml2::XMLElement* questRewardElement) {};
+
+    virtual void GiveReward(Quest* quest) = 0;
+
+    static QuestReward* CreateQuestReward( const tinyxml2::XMLElement* conditionElement);
+};
+
+class QuestReward_Item : public QuestReward{
+public:
+    QuestReward_Item(const tinyxml2::XMLElement* questRewardElement);
+
+    void GiveReward(Quest* quest) override;
+
+    ItemDefinition* m_itemToGive;
+};
+
+class QuestReward_Stats : public QuestReward{
+public:
+    QuestReward_Stats(const tinyxml2::XMLElement* questRewardElement);
+
+    void GiveReward(Quest* quest) override;
+
+    Stats* m_statsToGive;
+};
+
+class QuestReward_Ally : public QuestReward{
+public:
+    QuestReward_Ally(const tinyxml2::XMLElement* questRewardElement);
+
+    void GiveReward(Quest* quest) override;     //assumes that the actor to add to the party is the quest's giver
+};
+
+</pre>
+                  <div align="center"> QuestReward.hpp: Virtual class that different reward types inherit from and implement their own functionality</div>
                     <br>
                 <p>
-                The quest reward is a triggered once all steps in the quest have been completed. QuestReward is a pure virtual class, which individual rewards inherit from. Currently quests can award items, permanent stat increases, or party members. 
+                The quest reward is a triggered once all steps in the quest have been completed. QuestReward is a pure virtual class, which individual rewards inherit from. Each child class implements it's specific functionality, including how to give the player the reward for that kind of quest - currently quests can award items, permanent stat increases, or party members. This architecture allows the quest rewards to be stored ambiguously as a QuestReward* within any QuestDefinition, but maintains the correct functionality when a quest is completed.
                 </p>
                 <br>
                 <a href="#top"> Back To Top</a>
@@ -295,8 +405,26 @@
                     <img src = "https://etrizzo.github.io/images/adventure/ally_gameplay.gif" align="center" width="100%">
                 </div>
                 <p>In each encounter, the player can complete a special side-quest to gain an ally in their journey. Allies spawn with a quest near villages, and send the player on lengthy missions. Once you’ve completed the quest, the ally will join your party, and fight with you. The player can swap between controlling members of their party, and can equip any member of the party with equipment. </p>
-               <center><img src = "https://etrizzo.github.io/images/adventure/party_swap.png" align="center" width="100%"></center>
-                  <div align="center"> QuestReward.hpp: virtual class where different rewards inherit and implement their functionality</div>
+<pre class="prettyprint linenums language-cpp">
+//In gameplay, the player can swap by pressing '[' or ']' (which calls this function with swapDirection as -1 or +1)
+ void Party::SwapPlayer(int swapDirection)
+ {
+    //update the current player
+    int size = m_partyMembers.size();
+    //increment player index - add size to keep it >0 for mod
+    m_currentPlayerIndex = (m_currentPlayerIndex + swapDirection + size) % size;		
+    Actor* oldPlayer = m_currentPlayer;
+    m_currentPlayer = m_partyMembers[m_currentPlayerIndex];					//set the new player
+    m_currentPlayer->m_isPlayer = true;
+    oldPlayer->m_isPlayer = false;
+
+    //update all party members to be following the new player
+    for (Actor* actor : m_partyMembers){
+    	actor->SetFollowTarget(m_currentPlayer);
+    }
+ }
+</pre>
+                  <div align="center"> Party.cpp: swapping the active player updates the entire party's state</div>
                 <p>In code, the player’s party is made up of a list of Actor entities, with a pointer to the current controlled actor, and an index for where that actor is in the array. Switching between party members is as simple as incrementing that index, and modding the result to loop through the list. The player’s inventory is shared across all party members – whenever an actor joins the party, their entire inventory is added to the party. This system allows for any number of actors to join the party, and easily distribute equipment as the player sees fit. Though, for gameplay purposes, the number of party members should be limited.</p>
                 <br>
 
@@ -458,6 +586,8 @@
     
         <!-- include javascript for nav bar -->
     <script src="js/include.js"></script>
+
+
     
     <script> 
         $(function(){

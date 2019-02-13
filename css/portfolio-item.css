@@ -71,3 +71,20 @@ footer {
   border-style: solid;
   border-width: 4px;
 }
+
+
+
+
+.carousel-demonstration {
+  width: 35%;
+  background-image: none;
+  opacity:.5;
+}
+
+
+
+.carousel-demonstration:hover {
+  width: 35%;
+  background-image: none;
+  opacity:1;
+}
