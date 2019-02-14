@@ -14,8 +14,12 @@
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- prettyprint -->
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?"></script>
+
     <!-- Custom CSS -->
     <link href="css/portfolio-item.css" rel="stylesheet">
+    <link href="css/prettyprint.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -108,9 +112,40 @@
 
 <!-- Game Feature Template -->
                 <h4 id="starsection">Starfield</h4>
-                <div align="center">
-                    <img src = "https://etrizzo.github.io/images/asteroids/addstars.png" width="95%" align="center">
-                </div>
+<pre class="prettyprint linenums language-cpp">
+void Game::AddStars()
+{
+    //if long enough since last star spawn & not at max stars
+    if ((m_stars.size() <= MAX_STARS) && (m_gameTime > m_lastSpawnedStar + 0.3f)){
+        //check every "tile" on the screen for perlin noise value. 
+        //This determines chance for star spawn, and star size/opacity
+        AABB2 tileArea;
+        float step = SCREEN_MAX * (1.f / GRID_SIZE);
+        for (int x = 0; x < GRID_SIZE; x++){
+            for (int y = 0; y < GRID_SIZE; y++){
+                float xPos = x * step;
+                float yPos = y * step;
+                tileArea = AABB2(xPos, yPos, xPos + step, yPos + step);
+                float zOnTime =  m_gameTime* SCREEN_MAX * .1f;
+                //perlin noise waves cale should be about half the screen size
+                float perlinVal = Compute3dPerlinNoise(xPos, yPos, zOnTime, SCREEN_MAX * .5f);      
+                if (perlinVal > -0.5f){
+                    //fast range map for known range [-.5,1.5] to [0,1]
+                    float chanceForStars = (perlinVal + 1 ) * .66667f;   
+
+                    //check square of range-mapped perlin val to get much more spawning in high value areas, 
+                    //but at least some spawns in most areas
+                    if (CheckRandomChance(chanceForStars * chanceForStars)){
+                        AddNewStar(tileArea, chanceForStars * chanceForStars * chanceForStars);
+                        m_lastSpawnedStar = m_gameTime;
+                    }
+                }
+            }
+        }
+    }
+    
+}
+</pre>
                 <br>
                 <p>After my first semester at Guildhall, I decided to go back to asteroids, and improve it using everything I had learned. Though my engine had gained many rendering features, I wanted to stick to the untextured line aesthetic from the original asteroids. I chose to create a dynamic galaxy-like background, composed of hundreds of polygonal stars. The effect drastically improves the overall look of asteroids, and was a good investigation of how I can use perlin noise in a variety of different ways.</p>
                 <!--

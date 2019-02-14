@@ -59,7 +59,7 @@
 
             <img src="https://image.freepik.com/free-vector/geometric-background-with-text-of-coming-soon_1017-5069.jpg" width="100%" scrolling="no" style="border:0px #000000 none;" name="Thesis" align="center">
                 <h3>About Project</h3>
-                <p>For my thesis, I will be procedurally generating stories using directed graphs. Project complete May 2019.</p>
+                <p>For my thesis, I am working on procedurally generating stories using directed graphs. The project will not be complete until April 2019, so all information on this page is a work in progress.</p>
 
 
 
@@ -73,9 +73,12 @@
                             </ul>
                         </div>
                         <div class="col-sm-6">
-                            <h3>Features</h3>
+                            <h3>Project</h3>
                             <ul>
-                                <li><a href="#section1">Coming May 2019</a></li>
+                                <li><a href="#overview">Generation Overview</a></li>
+                                <li><a href="#graph">Graph Generation</a></li>
+                                <li><a href="#acts">Act structure</a></li>
+                                <li><a href="#analysis">Analysis</a></li>
                             </ul>
                         </div>
                     </div>
@@ -102,7 +105,52 @@
                 <hr>
 
 <!-- Game Feature Template -->
-                <h4 id="section1">Features Coming Soon</h4>
+                <h4 id="overview">Project Overview</h4>
+                <div align="center">
+                    <img src = "https://image.freepik.com/free-vector/geometric-background-with-text-of-coming-soon_1017-5069.jpg" align="center">
+                </div>
+                <br>
+                <p>NOTE: this is just a broad overview of the project - this page is still being updated as the artifact is completed. Come back later for a lot of great code, screenshots, and diagrams, but in the meantime, feel free to read up on the basic idea of my thesis project.</p>
+                <p>The goal of this project is to generate graphs which contain branching, valid stories, which are made up of snippets of text defined in data. The graph tracks the story state through each branch, including the state of all characters in the story, and any overarching story state. Within the graph, nodes represent actions in the story, and edges represent the state between any two actions.</p>
+                <p>Additionally, nodes can represent two different kinds of actions - events and outcomes. Events describe the concrete actions in the story, while outcomes describe the direct outcomes of certain events, and create branches in the story.</p>
+                <p>The graph starts with a symbolic "Start" and "End" node, and generates by adding pairs of event/outcome nodes until the graph reaches a desired size. Nodes can be placed at an edge if all of the requirements for the node are met at that edge, and if the effects of that node will not invalidate any of the already-placed nodes after it. After there are a suitable number of nodes, the graph checks that all branches in the graph reach a satisfying ending by adding nodes to endless branches.</p>
+                <p>At this point, we have a graph of possible stories, which can be used as is in a number of ways - I am experimenting integrating the graph into my <a href="adventure.html">procedurally generated 2D roguelike</a> to enhance the quest system and NPCs with procedurally generated village stories. The graph could also be used as a text adventure, and imported into a system like Twine. But I also wanted to be able to pull a specific story out of the graph, and specifically one that is considered interesting.</p>
+                <p>To do this, I use A* pathfinding with a heuristic that determines which branch to choose based on the concrete story state reached at that point. In graph form, the states are somewhat ambiguous, because branches fork and reconvene and we can't be sure which branch has ~actually~ happened. But while pathfinding, we can track the actual, concrete story state and use that to weight the outcomes of branches. For instance, if we know that a dungeon explorer actually did enter the secret side-chamber that gave her night-vision goggles in an earlier branch, then we can make it more likely for her to successfully explore the darker path when she reaches another fork in the road - or, if she never found the night vision goggles, it might be more likely that she gets lost in the darker path. Using this heuristic, we can pick out an interesting story that builds on its previous state.</p>
+                </p>
+                <br>
+                <a href="#top"> Back To Top</a>
+                <br>
+                <hr>
+
+
+
+                <h4 id="graph">Features Coming Soon</h4>
+                <div align="center">
+                    <img src = "https://image.freepik.com/free-vector/geometric-background-with-text-of-coming-soon_1017-5069.jpg" align="center">
+                </div>
+                <br>
+                <p>CONTENT COMING SOON</p>
+                <br>
+                <a href="#top"> Back To Top</a>
+                <br>
+                <hr>
+
+
+
+                <h4 id="acts">Features Coming Soon</h4>
+                <div align="center">
+                    <img src = "https://image.freepik.com/free-vector/geometric-background-with-text-of-coming-soon_1017-5069.jpg" align="center">
+                </div>
+                <br>
+                <p>CONTENT COMING SOON</p>
+                <br>
+                <a href="#top"> Back To Top</a>
+                <br>
+                <hr>
+
+
+
+                <h4 id="analysis">Features Coming Soon</h4>
                 <div align="center">
                     <img src = "https://image.freepik.com/free-vector/geometric-background-with-text-of-coming-soon_1017-5069.jpg" align="center">
                 </div>
