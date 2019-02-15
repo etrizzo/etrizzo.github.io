@@ -216,7 +216,7 @@
                     <img src = "https://etrizzo.github.io/images/larana/BuildSchedule.png" align="center" class="img-rounded img-responsive">
                 </div>
                 <br>
-                <p>As the technical lead on the project, it was my job to make regular builds, especially towards the end of the project, and ensure that they were stable. This included monitoring game performance, approving any risky project pushes, and tracking bugs. Early in the project, I worked with other tech leads at the guildhall to create scripts that would run each night on a designated build PC, and worked with my producer to coordinate QA testing on both the nightly build and on midday builds created on my own computer. As we began making release candidates for shipping, I was responsible for ensuring that any development tools were turned off in the build, and creating both a standalone executable and a Steam build. </p>
+                <p>As the technical lead on the project, it was my job to make regular builds, especially towards the end of the project, and ensure that they were stable. This included monitoring game performance, approving any risky project pushes, and tracking bugs. Early in the project, I worked with other tech leads at the Guildhall to create scripts that would run each night on a designated build PC. As the project progressed, I worked with my producer to coordinate QA testing on both the nightly build and on midday builds created on my own computer. As we began making release candidates for shipping, I was responsible for ensuring that any development tools were turned off in the build, and creating both a standalone executable and a Steam build. </p>
                 <p>Along with our steam build, I also worked on ports of the game to the PlayStation 4 and Universal Windows Platform. In the end, we didn't have an avenue to publish to the PlayStation store or the Microsoft store, so we didn't dive into console-specific optimization. But the process of making builds for both PS4 and UWP was very valuable and I'm excited to take that knowledge forward to any future console ports.</p>
                 <br>
                 <a href="#top"> Back To Top</a>
@@ -295,7 +295,7 @@
                     <div class="col-xs-12 col-sm-6">
                         <h4>Loading</h4>
                         <p>We knew that we didn't want to break up player experience with any sort of level select or extended loading during gameplay. This meant that the entire game would be in one persistent level, with parts of that level loading in and out around the player as they progressed. This would also mean a much longer load time when the player started the game.</p>
-                        <p>To avoid a long, static break going into the game, I implemented an animated loading screen to play while all of the initial loading was being handled. Immediately after entering the (empty) game level from the main menu, the loading screen is placed over the viewport and begins animating. Then, the rest of the game is loaded in asynchronously, so the animation as smoothly as possible. Once all of the necessary streaming levels are loaded, the loading screen is removed from the viewport, and the player is given control.</p>  
+                        <p>To avoid a long, static break going into the game, I implemented an animated loading screen to play while all of the initial loading was being handled. Immediately after entering the (empty) game level from the main menu, the loading screen is placed over the viewport and begins animating. Then, the rest of the game is loaded in asynchronously, so the animation runs as smoothly as possible. Once all of the necessary streaming levels are loaded, the loading screen is removed from the viewport, and the player is given control.</p>  
                     </div>
                 </div>
                 <a href="#top"> Back To Top</a>
@@ -428,7 +428,7 @@
     -->
         <!-- /.row -->
 
-        <hr>
+       
 
         <!-- Footer -->
         <footer>
