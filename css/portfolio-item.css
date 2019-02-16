@@ -61,6 +61,11 @@ footer {
   min-height: 400px;
 }
 
+.smallprojects-bg {
+  background-image: url("https://etrizzo.github.io/images/smallprojects/background.png");
+  min-height: 400px;
+}
+
 
 .modal-click {
   box-shadow: 5px 5px 10px grey;
