@@ -45,6 +45,7 @@
                 </h1>
             </div>
         </div>
+        <div class="container">
         <div class="row">
             <div class="col-sm-6">
                 <br>
@@ -53,35 +54,129 @@
                 </p>
             </div>
             <div class="col-sm-6">
-                <h3>Projects</h3>
+                <h4>Projects</h4>
                 <ul>
                     <li><a href="#flowers">Generative flowers</a></li>
-                    <li><a href="#cozy">Gettin' Cozy</a></li>
+                    <li><a href="#comfy">Gettin' Comfy</a></li>
                     <li><a href="#tify">This is for you!</a></li>
+                    <li><a href="#dragons">Dragon Curves</a></li>
+                    <!--
                     <li><a href="#steppingstones">Stepping Stones</a></li>
                     <li><a href="#flocking">Flocking</a></li>
+                    -->
                 </ul>
             </div>
         </div>
+    </div>
+    <hr>
         <!-- /.row -->
 
-        <!-- Portfolio Item Row -->
-        <div class="row well">
-            <h2>LD42 - This Is For You!</h2>
-            <h4>Pico8 | 2.5 Day Jam | Team of 2</h4>
-            <hr>
+
+        <div class="row well" id="flowers">
+            
             <div class="row col-sm-4">
-                <img src = "https://etrizzo.github.io/images/smallprojects/thisisforyou.gif" width="100%" />
+                <a href="#" data-toggle="modal" data-target="#flowerModal" ><img src = "https://etrizzo.github.io/images/smallprojects/flowers.gif" name="Generative Flowers" class="modal-click" width="100%"></a>
+                
+                    <div id="flowerModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog modal-lg">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                      <div class="modal-body">
+                        <center>
+                        <img src = "https://etrizzo.github.io/images/smallprojects/flowers.gif" name="Flowers" class="img-rounded" width="100%">
+                        <br>
+                         <p>Just some pretty flowers :^)</p>
+                     </center>
+                      </div>
+                    </div>
+                    </div>
+
+                    </div>
+
+
             </div>
-            <div class="row col-sm-8">
-            <p>
-                "This is for You!" was my submission for Ludum Dare 42 in August 2018. The theme was "running out of space," so we decided to take this foreboding theme and make a game about not having enough space in your hands to hold flowers for your mom. This was my first experience with Pico-8, and I pretty quickly fell in love with it. On the project, I worked on the flower generation (each one is different!), the rating system, and the heart particles. I also did all of the art and music for the project! To Play "This is for You!" visit the <a href="https://tinkkles.itch.io/this-is-for-you">itch.io page here.</a>
-            </p>
-            <p>
-                <a href="https://tinkkles.itch.io/this-is-for-you"><button type="button" class="btn btn-primary">
-                           Play "This Is For You!"
-                        </button></a>
-            </p>
+            <div class="row col-sm-8" style="margin:15px;">
+                <h2>Generative Flowers</h2>
+                <h4>Personal Engine</h4>
+                <hr>
+                <p>
+                    While adding some randomized color functions to my engine, I decided to play with generating simple flowers in a stained-glass sort of style. I used the "golden angle" to place petals and seeds, as well as finding complementary colors for the center of the flower. To find the base petal color, I use HSV representation of colors to find colors in believable ranges on the color wheel, and then convert it to RGBA. Once the base color is found, I can just append triangles along each petal with a random color close to the base petal color. The center of the flower is made by adding triangles off of the center of the flower at intervals of 137 degrees, with the radius from center increasing with each triangle added. The effect mimics the "golden ratio" spiral found in real flowering plants around world. These are all very simple tricks, but I love the way they turned out!
+                </p>
+            </div>
+        </div>
+
+        <!-- Portfolio Item Row -->
+        <div class="row well" id="comfy">
+            <div class="row col-sm-8" style="margin:15px;">
+                <h2>GGJ2019 - Gettin' Comfy</h2>
+                <h4>Unity | 2.5 Day Jam | Team of 5</h4>
+                <hr>
+                <p>
+                    "Gettin' Comfy" was my submission for Global Game Jam in January 2019. The theme was "What home means   to you," so my team decided to make a twister-esque game about stretching out and getting comfortable     in your bed. On the project, I worked on the main mechanic of stretching out your limbs, implementing a simple spline system which tracked    placement as you drag your arm/leg out. We didn't have an artist for the jam, so many of our assets were  downloaded for free from the asset store. To combat this cobbled-together look, I made a few 2D    assets, and worked on a toon shader to try and give our assets a more unified look. To Play "Gettin' Comfy" visit the <a href="https://nw-shade.itch.io/gettin-comfy">itch.io page here.</a>
+                </p>
+                <p>
+                    <a href="https://nw-shade.itch.io/gettin-comfy"><button type="button" class="btn btn-primary">
+                               Play "Gettin' Comfy"
+                            </button></a>
+                </p>
+            </div>
+            <div class="row col-sm-4">
+                <img src = "https://etrizzo.github.io/images/smallprojects/gettincomfy.png" width="100%" class="img-rounded" />
+            </div>
+        </div>
+
+        <!-- Portfolio Item Row -->
+        <div class="row well" id="tify">
+            
+            <div class="row col-sm-4">
+                <img src = "https://etrizzo.github.io/images/smallprojects/thisisforyou.gif" width="100%" class="img-rounded"/>
+            </div>
+            <div class="row col-sm-8"  style="margin:15px;">
+                <h2>LD42 - This Is For You!</h2>
+                <h4>Pico8 | 2.5 Day Jam | Team of 2</h4>
+                <hr>
+                <p>
+                    "This is for You!" was my submission for Ludum Dare 42 in August 2018. The theme was "running out of    space," so we decided to take this foreboding theme and make a game about not having enough space in your  hands to hold flowers for your mom. This was my first experience with Pico-8, and I pretty quickly fell  in love with it. On the project, I worked on the flower generation (each one is different!), the rating  system, and the heart particles. I also did all of the art and music for the project! To Play "This is   for You!" visit the <a href="https://tinkkles.itch.io/this-is-for-you">itch.io page here.</a>
+                </p>
+                <p>
+                    <a href="https://tinkkles.itch.io/this-is-for-you"><button type="button" class="btn btn-primary">
+                               Play "This Is For You!"
+                            </button></a>
+                </p>
+            </div>
+        </div>
+
+
+        <div class="row well" id="dragons">
+            
+            
+            <div class="row col-sm-8" style="margin:15px;">
+                <h2>Dragon Curves</h2>
+                <h4>Pico-8</h4>
+                <hr>
+                <p>
+                    Dragon curves are definitely my favorite fractal curve, so to get familiar with Pico-8 and Lua I decided to play around with drawing them. The pattern is straightforward - each iteration is just the previous pattern twice, once in exactly the same format, and again rotated 45 degrees. In code, this works out to be a sequence of turns, where the first half represents the previous iteration, then there's a right turn, then every turn in the previous iteration is flipped. This is actually the same pattern you get when folding a piece of paper in half repeatedly, which is pretty neat. Someday, I'll think of a way to use dragon curves in a game, but for now, they're really cool to look at.
+                </p>
+            </div>
+            <div class="row col-sm-4">
+                <a href="#" data-toggle="modal" data-target="#dragonModal" ><img src = "https://etrizzo.github.io/images/smallprojects/dragon.gif" name="Dragon Curves" class="modal-click" width="100%"></a>
+                
+                    <div id="dragonModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog modal-lg">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                      <div class="modal-body">
+                        <center>
+                        <img src = "https://etrizzo.github.io/images/smallprojects/dragon.gif" name="Dragon Curves" class="img-rounded" width="100%">
+                        <br>
+                         <p>Dragon curves with fluctuating depth.</p>
+                     </center>
+                      </div>
+                    </div>
+                    </div>
+
+                    </div>
+
 
             </div>
         </div>
