@@ -116,7 +116,7 @@
                 <br>
             -->
                 <p>
-                    Developed using blueprint and Unreal's UMG widget sytem, the menu system consisted of several sub-menus (options, character select, track select, etc.) which could be navigated easily and seamlessly. To do this, I implemented each individual menu’s functionality into a separate widget blueprint, and consolidated each widget into a single “Main Menu” widget which controlled swapping between menus and managed the overall game state. This system allowed developers to work on individual menus independently, while still keeping the overall functionality consolidated into one place.
+                    Developed using blueprint and Unreal's UMG widget sytem, the menu system consists of several sub-menus (options, character select, track select, etc.) which can be navigated easily and seamlessly. To do this, I implemented each individual menu’s functionality into a separate widget blueprint, and consolidated each widget into a single “Main Menu” widget which controls swapping between menus and manages the overall game state. After each menu has been navigated, and players have selected their control schemes, players, and track, the menu loads the correct level, and sends all of this information into the game to make sure players spawn with the correct vehicles and controls. This system allowed developers to work on individual menus independently, while still keeping the overall functionality consolidated into one place.
                 </p>
                 <br>
                 <a href="#top"> Back To Top</a>
@@ -128,7 +128,7 @@
                     <img src = "https://etrizzo.github.io/images/irl/character_select.gif" align="center"  width="100%">
                 </div>
                 <br>
-                <p>The character select screen required that multiple players to be able to navigate the menu independently and simultaneously, similar to other couch co-op menu systems such as Mario Kart or Super Smash Brothers. This required some design on the PlayerController blueprint for the main menu, which would keep track of the player’s current character selection, and whether or not that had made their final selection. This state needed to be clearly conveyed to the player as well, with independent cursors and “hover” states for character images.</p>
+                <p>The character select screen required that multiple players to be able to navigate the menu independently and simultaneously, similar to other couch co-op menu systems such as Mario Kart or Super Smash Brothers. This required some design on the PlayerController blueprint for the main menu, which keeps track of the player’s current character selection, and whether or not that player has made their final selection. This state needs to be clearly conveyed to the player as well, with independent cursors and “hover” states for character images.</p>
                 <br>
                 <a href="#top"> Back To Top</a>
                 <br>
@@ -153,10 +153,10 @@
                 <br>
                 <p>In any racing game, the player needs to be able to quickly identify other players and CPUs, and gauge where they were in the race. In order to do this, we chose to implement icons over surrounding players, and proximity indicators which appear when a car is approaching the player from behind. </p>
                 <p>
-                    For the player icons, each human player’s HUD required up to 7 player icons on screen, which tracked an enemy player whenever it was on screen, and disappeared when it was not on screen, or was too far away to be relevant to the player. To implement this, I added a set of 7 icons to the screen, and gave each icon an enemy car to “track”. While the target car was visible and within a set range of the player (determined by designers), the icon would update its screen position to be above the car’s screen position, and hide itself if those conditions were not met.
+                    For the player icons, each human player’s HUD requires up to 7 player icons on screen, which track other car's positions while they are in view, and disappear when the enemy car is not visible or too far away. To implement this, I added a set of 7 icons to the screen, and gave each icon an enemy car to “track”. While the target car was visible and within a set range of the player (determined by designers), the icon updates its screen position to be above the car’s screen position, and hides itself if those conditions are not met.
                 </p>
                 <p>
-                    For the proximity indicators, each car needed in-world indicators, which would become visible when cars approaching from behind got close. When a car met this criteria, the indicator would rotate to “point” at the approaching car, so that the player could make quick decisions to avoid collisions. 
+                    For the proximity indicators, each car has in-world indicators, which become visible when cars approaching from behind get close. When a car meets this criteria, the indicator rotates to “point” at the approaching car, so that the player can make quick decisions to avoid collisions. 
                 </p>
                 <br>
                 <a href="#top"> Back To Top</a>
