@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>3D Tank Shooter</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- prettyprint -->
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?"></script>
+
+    <!-- Custom CSS -->
+    <link href="css/portfolio-item.css" rel="stylesheet">
+    <link href="css/prettyprint.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+<!-- Navigation -->
+   <div id="nav"></div>
+
+    <!-- Page Content -->
+<div class="unwelcome-bg">
+    <div class="container" >
+        <div class="content">
+
+        <!-- Portfolio Item Heading -->
+        <div class="jumbotron">
+
+                <h1 class="page-header" id="top">3D Tank Shooter
+                </h1>
+                <center>  
+                    <!-- img: -->
+                    <img src="https://etrizzo.github.io/FeatureImage.png" width="100%" height="700px" scrolling="no" style="border:0px #000000 none;" name="FeatureImage" align="center">
+
+                    <!-- video: -->
+                    <!--
+                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/ZwPy7SqM2mU" frameborder="0" allow="accelerometer; encrypted-media" allowfullscreen>  </iframe>
+                    -->
+                </center>
+
+        </div>
+        <!-- /.row -->
+
+        <!-- Portfolio Item Information -->
+        
+        <div class="row">
+
+             <div class="col-xs-12 col-sm-8">
+                <h3>About My Project</h3>
+                <p>About the project
+                </p>
+                <p>
+                This is cool
+                </p>
+                <h3>My Role</h3>
+                <p>
+                    This is what I did.
+                </p>
+            </div>
+
+            <div class="col-xs-12 col-sm-4">
+                <div class="well">
+                    <h3 style="margin-top: 5px;">Specs</h3>
+                    <table class="table" style="margin-bottom: 0px;">
+                        <tbody>
+                            <tr>
+                                <td>Engine</td>
+                                <td><b>Personal Engine</b></td>
+                            </tr>
+                            <tr>
+                                <td>Languages:</td>
+                                <td><b>C++, GLSL, XML</b></td>
+                            </tr>
+                            <tr>
+                                <td>Development Time:</td>
+                                <td><b>2 months</b>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+                <div class="well">
+                    <h3 style="margin-top: 5px;">Links</h3>
+                    <center>
+                     <a href="https://github.com/etrizzo/PersonalEngineGames/tree/master/SDST/TankGame"><button type="button" class="btn btn-primary">
+                          Github
+                    </button></a>
+                    </center>
+                </div>
+
+                <div class="well">
+                    <h3 style="margin-top: 5px;">Features</h3>
+                     <ul>
+                        <li><a href="#terrain">Terrain Generation</a></li>
+                        <li><a href="#movement">Tank Movement/Aiming</a></li>
+                        <li><a href="#enemies">Swarming AI</a></li>
+                        <li><a href="#rendering">Forward Render Path</a></li> <!-- subsections for lighting? -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <h3>Game Features</h3>
+        <hr>
+
+<!-- Game Feature Template -->
+        <h4 id="terrain">Terrain Generation</h4>
+        <div align="center">
+            <img src = "https://etrizzo.github.io/FeatureImage.png" width="100%" align="center">
+        </div>
+        <br>
+        <p>CONTENT GOES HERE LOL</p>
+        <br>
+
+        <pre class="prettyprint linenums language-cpp">
+class Garbage{
+public:
+    Garbage(){};
+    Garbage(Vector2 position) {};
+
+    virtual void EatGarbo() = 0;
+};
+
+class Garbage_A : public Garbage{
+public:
+    Garbage_A(Vector2 position);
+
+    void EatGarbo() override;
+
+    Garbo* m_garboToEat;
+};
+
+
+</pre>
+<div align="center"> Garbo.hpp : Code Sample using Prettyprint</div>
+<br>
+        <br>
+        <a href="#top"> Back To Top</a>
+        <br>
+        <hr>
+
+    <h4 id="movement">Player Movement/Aiming</h4>
+    <h3>Movement </h3>
+        <div align="center">
+            <img src = "https://etrizzo.github.io/images/tankgame/movement.gif" width="100%" align="center">
+        </div>
+        <br>
+        <p>TankGame uses a single-point physics system for the player movement, where the tank is always "stuck" to the surface of the terrain and oriented with the normal of the terrain at that point. To do this, I do all movement on the player's XZ position, and every frame update the tank's 3D position accordingly. The Y (vertical) position is determined by the height of the terrain at that point - which is an interpolation of the heights at the four vertices of the current face. Similarly, the orientation is the interpolated normal of the 4 vertices' normals. I want to preserve the forward orientation of the tank for gameplay feel, so I choose to cross the terrain's normal (which is the tank's new "up" vector) with it's existing forward vector. This gives me a new right vector for the tank, and from there, I can cross this new right with the normal to get the final forward vector, which might be pitched slightly up or down from the existing forward. This means that as the player is moving forward with "W", they move predictably across the terrain without drifting left and right as they go over hills, while the body of the tank rolls to match the terrain.</p>
+        <br>
+
+        <pre class="prettyprint linenums language-cpp">
+void Player::SetWorldPositionFromXZPosition()
+{
+    //get the world position - our XZ position at the world's height + a little padding for feel
+    Vector3 worldPos = Vector3(m_positionXZ.x, GetHeightAtCurrentPos() + RENDERABLE_OFFSET, m_positionXZ.y);
+
+    //normal is the interpolated normal of the terrain at our XZ position
+    Vector3 normal = g_theGame->m_currentMap->GetNormalAtPosition(m_positionXZ);
+    
+    //want to maintain forward of the tank - cross this with our new up
+    Vector3 forward = GetForward(); 
+    Vector3 newUp = normal.GetNormalized();
+    Vector3 newRight = Cross(newUp, GetForward()).GetNormalized();
+    Vector3 newForward = Cross(newRight, newUp).GetNormalized();
+
+    //the new transform of the tank
+    Matrix44 mat = Matrix44(newRight, newUp, newForward, worldPos);
+
+    //set the transform of the renderable (with orientation) and the position of the spherical collider and shadow camera transform
+    m_renderable->m_transform.SetLocalMatrix(mat);
+    m_collider.SetPosition(worldPos);
+    m_shadowCameraTransform->SetLocalPosition(worldPos + m_shadowCameraOffset);
+
+}
+</pre>
+<div align="center"> Player.cpp : Sets the tank's 3D position and orientation on each frame</div>
+<br>
+
+     <h3>Aiming</h3>
+        <div align="center">
+            <img src = "https://etrizzo.github.io/images/tankgame/aiming.gif" width="100%" align="center">
+        </div>
+        <br>
+        <p>In TankGame, the tank always aims at the target at the center of the screen - indicated by the red square.This target is the hit point of a raycast through the <i>camera's</i> forward - Once this position is identified, the tank turret turns to look towards it every frame. The raycast is a basic step-and-sample algorithm, with some improvements to find a relatively accurate hit point with a relatively small number of steps. The raycast hits if it is inside the sphere collider of an enemy or the box collider of a base, or if it passes beneath the terrain, which can be determined by the height of the terrain at the XZ position of each step of the raycast. Once a step determines that a hit has occured, I narrow down the actual hit position by looking at the midpoint of the position before the hit and the hit position, and checking if that point is a hit. Using a "binary search"-ish algorithm, I can continue getting the midpoint of the most recent non-hit position and the most recent hit position I've found to narrow down an accurate hit position very quickly. This allows me to have a fairly large initial step size (about 20% of a terrain tile), and still have a fairly accurate position for the target barrel target. While the large step size does miss hits at narrow corners of bases, enemies, and terrain, this tradeoff is barely noticeable in a fast-moving game like this.</p>
+        <br>
+        <br>
+        <a href="#top"> Back To Top</a>
+        <br>
+        <hr>
+
+
+        <h4 id="enemies">Swarming AI</h4>
+        <div align="center">
+            <img src = "https://etrizzo.github.io/images/tankgame/swarming.gif" width="100%" align="center">
+        </div>
+        <br>
+        <p>CONTENT GOES HERE LOL</p>
+        <br>
+
+        <br>
+        <a href="#top"> Back To Top</a>
+        <br>
+        <hr>
+
+
+        <h4 id="rendering">Forward Render Path</h4>
+        <div align="center">
+            <img src = "https://etrizzo.github.io/images/tankgame/swarming.gif" width="100%" align="center">
+        </div>
+        <br>
+        <p>CONTENT GOES HERE LOL</p>
+        <br>
+
+        <br>
+        <a href="#top"> Back To Top</a>
+        <br>
+        <hr>
+        <!-- /.row -->
+
+        <!-- Related Projects Row -->
+        <!--
+        <div class="row">
+
+            <div class="col-lg-12">
+                <h3 class="page-header">Related Projects</h3>
+            </div>
+
+            <div class="col-sm-3 col-xs-6">
+                <a href="flocking.html">
+                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
+                </a>
+            </div>
+
+            <div class="col-sm-3 col-xs-6">
+                <a href="marble.html">
+                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
+                </a>
+            </div>
+
+            <div class="col-sm-3 col-xs-6">
+                <a href="#">
+                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
+                </a>
+            </div>
+
+            <div class="col-sm-3 col-xs-6">
+                <a href="#">
+                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
+                </a>
+            </div>
+
+        </div>
+    -->
+        <!-- /.row -->
+
+        <hr>
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p></p>
+                </div>
+            </div>
+            <!-- /.row -->
+        </footer>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+    
+        <!-- include javascript for nav bar -->
+    <script src="js/include.js"></script>
+    
+    <script> 
+        $(function(){
+            $("#nav").load("nav.html");
+        });
+    </script> 
+
+</body>
+
+</html>
