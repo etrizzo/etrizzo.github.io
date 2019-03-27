@@ -47,7 +47,7 @@
                 </h1>
                 <center>  
                     <!-- img: -->
-                    <img src="https://etrizzo.github.io/FeatureImage.png" width="100%" height="700px" scrolling="no" style="border:0px #000000 none;" name="FeatureImage" align="center">
+                    <img src="https://etrizzo.github.io/images/tankgame/terrain.png" width="100%" height="700px" scrolling="no" style="border:0px #000000 none;" name="FeatureImage" align="center">
 
                     <!-- video: -->
                     <!--
@@ -63,16 +63,26 @@
         <div class="row">
 
              <div class="col-xs-12 col-sm-8">
-                <h3>About My Project</h3>
-                <p>About the project
+                <h3>About TankGame</h3>
+                <p>TankGame is a 3D tank shooter where 3 enemy bases spawn minions continuously up to a cap of 75 enemies. Minions swarm towards the player, and damage the player on contact. To win, the player must destroy all bases and enemies without dying. This project pushed me to expand my engine's 3D capabilities - over the course of the 2 months of development, I added a forward rendering pipeline, material definitions, shadows, a transform class with parenting capabilities similar to Unity, a MeshBuilder with the capability to combine primitive shapes into a single mesh, and a particle system. In addition to the improvements to my engine, the project allowed me to explore some simple 3D physics, map generation, and AI.
                 </p>
-                <p>
-                This is cool
-                </p>
-                <h3>My Role</h3>
-                <p>
-                    This is what I did.
-                </p>
+
+                 <div class="well">
+                    <h3 style="margin-top: 5px;">Features</h3>
+                    <h4>Gameplay</h4>
+                     <ul>
+                        <li><a href="#movement">Tank Movement</a></li>
+                        <li><a href="#aiming">Tank Aiming</a></li>
+                        <li><a href="#terrain">Terrain Generation</a></li>
+                        <li><a href="#enemies">Swarming AI</a></li>
+                    </ul>
+                    <h4>Engine Features</h4>
+                    <ul>
+                        <li><a href="#profiler">Profiler</a></li>
+                        <li><a href="#materials">Materials</a></li>
+                        <li><a href="#rendering">Forward Render Path and Lighting</a></li> <!-- subsections for lighting? -->
+                    </ul>
+                </div>
             </div>
 
             <div class="col-xs-12 col-sm-4">
@@ -107,15 +117,7 @@
                     </center>
                 </div>
 
-                <div class="well">
-                    <h3 style="margin-top: 5px;">Features</h3>
-                     <ul>
-                        <li><a href="#terrain">Terrain Generation</a></li>
-                        <li><a href="#movement">Tank Movement/Aiming</a></li>
-                        <li><a href="#enemies">Swarming AI</a></li>
-                        <li><a href="#rendering">Forward Render Path</a></li> <!-- subsections for lighting? -->
-                    </ul>
-                </div>
+               
             </div>
         </div>
 
@@ -124,43 +126,7 @@
         <hr>
 
 <!-- Game Feature Template -->
-        <h4 id="terrain">Terrain Generation</h4>
-        <div align="center">
-            <img src = "https://etrizzo.github.io/FeatureImage.png" width="100%" align="center">
-        </div>
-        <br>
-        <p>CONTENT GOES HERE LOL</p>
-        <br>
-
-        <pre class="prettyprint linenums language-cpp">
-class Garbage{
-public:
-    Garbage(){};
-    Garbage(Vector2 position) {};
-
-    virtual void EatGarbo() = 0;
-};
-
-class Garbage_A : public Garbage{
-public:
-    Garbage_A(Vector2 position);
-
-    void EatGarbo() override;
-
-    Garbo* m_garboToEat;
-};
-
-
-</pre>
-<div align="center"> Garbo.hpp : Code Sample using Prettyprint</div>
-<br>
-        <br>
-        <a href="#top"> Back To Top</a>
-        <br>
-        <hr>
-
-    <h4 id="movement">Player Movement/Aiming</h4>
-    <h3>Movement </h3>
+    <h4 id="movement">Player Movement</h4>
         <div align="center">
             <img src = "https://etrizzo.github.io/images/tankgame/movement.gif" width="100%" align="center">
         </div>
@@ -196,7 +162,7 @@ void Player::SetWorldPositionFromXZPosition()
 <div align="center"> Player.cpp : Sets the tank's 3D position and orientation on each frame</div>
 <br>
 
-     <h3>Aiming</h3>
+     <h4 id="aiming">Player Aiming</h4>
         <div align="center">
             <img src = "https://etrizzo.github.io/images/tankgame/aiming.gif" width="100%" align="center">
         </div>
@@ -208,13 +174,40 @@ void Player::SetWorldPositionFromXZPosition()
         <br>
         <hr>
 
+        <h4 id="terrain">Terrain Generation</h4>
+        <div align="center">
+            <img src = "https://etrizzo.github.io/images/tankgame/terrain.png" width="100%" align="center">
+        </div>
+        <br>
+        <p>The terrain in TankGame is generated from a noise texture, which determines the height of the terrain. Given the desired size of the map, min and max height, number of chunks, and the number of planes per chunk, the position of each vertex of the terrain can be determined. The provided extents of the map is divided into an even grid of vertices, where the height of each vertex is determined by the value of the red pixel at the image's corresponding uvs. Once all of the heights have been found, a mesh is constructed using these vertices - the terrain can also be split into chunks for future culling. in addition to constructing the mesh, the normal at each vertex can be determined by crossing the directions to adjacent vertices. this normal is used for lighting and the player tank.</p>
+        <p>After the terrain's mesh is generated, a plane for the water is added 33% of the way between the minimum height and the maximum height of the terrain. This plane has alpha, and has a shader that scrolls the uvs of the water texture to simulate "moving" water.</p>
+        <br>
+
+        <br>
+        <a href="#top"> Back To Top</a>
+        <br>
+        <hr>
 
         <h4 id="enemies">Swarming AI</h4>
         <div align="center">
             <img src = "https://etrizzo.github.io/images/tankgame/swarming.gif" width="100%" align="center">
         </div>
         <br>
-        <p>CONTENT GOES HERE LOL</p>
+        <p>In TankGame, bases continuously spawn enemy minions up until a cap. These enemies swarm towards the player in large clusters, using a simple swarming algorithm. On each frame, each computes the direction they should move by weighting the different behaviors they should exhibit to swarm. The minions should cluster towards nearby enemies, but also stay far enough away that they aren't overlapping. Additionally, the clusters should attempt to move in a unified direction, so their forward direction should be weighted by their neighboring minions forward directions. And finally, their forward direction should turn slowly towards the player. All of these vectors are calculated and averaged together using pre-defined weights for each behavior, to form the new forward direction of the minion. The weights of these four factors on the forward direction can be easily manipulated to change the behavior of the swarm.</p>
+        <br>
+
+        <br>
+        <a href="#top"> Back To Top</a>
+        <br>
+        <hr>
+
+        <h4 id="profiler">Profiler</h4>
+        <div align="center">
+            <img src = "https://etrizzo.github.io/images/tankgame/profiler.gif" width="100%" align="center">
+        </div>
+        <br>
+        <p>To monitor performance of the swarming AI and the rendering pipeline, I added a profiler to my engine. In code, I can specify a start and end point to profile - this signals to the profiler to measure how many cycles take place between these points. At the end of each frame, calculations are done on each marked area to establish how much of the frame was spent in each section. The information for the last 128 frames are saved by the profiler, and made into a bar graph which shows how long each frame took. I can select any of these frames to look at in detail, to establish what areas of the code if any are especially slow. This tool remains useful today for optimizing my projects.</p>
+        <p>It's worth noting that the act of running and rendering the profiler is ironically pretty slow, due to the amount of calculation and rendering of the UI, as evidenced by the spike in frame time when the profiler is opened in the gif. While profiling, I measure these frame costs so that I can calculate about how much the profiler is impacting what I'm seeing. In the future, I'd like to add a toggle to remove these frame costs as part of the graph at all, so that I can focus on the performance of the game running without the profiler.
         <br>
 
         <br>
@@ -223,13 +216,116 @@ void Player::SetWorldPositionFromXZPosition()
         <hr>
 
 
-        <h4 id="rendering">Forward Render Path</h4>
+        <h4 id="materials">Data-Driven Materials</h4>
+        <pre class="prettyprint linenums language-cpp">
+&ltmaterial name="default_lit" shader="lit_fog"&gt
+    &lttextures&gt
+        &lttexture type="diffuse" path="white" /&gt
+        &lttexture type="normal" path="flat" /&gt
+    &lt/textures&gt
+    &ltproperties&gt
+        &ltproperty type="float" name="SPECULAR_AMOUNT" value=".5" /&gt
+        &ltproperty type="float" name="SPECULAR_POWER" value="3" /&gt
+        &ltproperty type="RGBA" name="TINT" value="255,255,255,255"/&gt
+    &lt/properties&gt
+&lt/material&gt
+
+&ltmaterial name="water" shader="water"&gt
+    &lttextures&gt
+        &lttexture type="diffuse" path="water_2.png" /&gt
+    &lt/textures&gt
+&lt/material&gt
+
+&ltmaterial name="terrain" shader="lit_fog"&gt
+    &lttextures&gt
+        &lttexture type="diffuse" path="grass_green_d.png" /&gt
+        &lttexture type="normal" path="grass_green_n.png" /&gt
+    &lt/textures&gt
+&lt/material&gt
+        </pre>
+        <div align="center"> materials.xml : loaded at startup, stores materials as a static map that can be used by any renderable.</div>
+<br>
+        <br>
+        <p>To simplify the process of rendering an object, I added a data-driven material system to my renderer. This combines the shader, any textures that should be used for the material, and any properties that the material should bind to the GPU. Each renderable has one or more materials - one for each mesh on the renderable. This allows the user to easily combine every aspect of an objects rendering in one place, so that the diffuse/normal textures, properties, and shader don't have to defined separately at creation. Additionally, each renderable instances shallow copies of the materials - which allows for gameplay effects on a specific entity using that material. For example, when a base is shot, it could flash red for a second by changing the tint of the material, without changing the tint of the identical materials on the other bases.</p>
+
+
+        <br>
+        <a href="#top"> Back To Top</a>
+        <br>
+        <hr>
+
+
+        <h4 id="rendering">Forward Render Path and Lighting</h4>
         <div align="center">
-            <img src = "https://etrizzo.github.io/images/tankgame/swarming.gif" width="100%" align="center">
+            <img src = "https://etrizzo.github.io/images/tankgame/lighting.gif" width="100%" align="center">
         </div>
         <br>
-        <p>CONTENT GOES HERE LOL</p>
+        <p>To streamline the 3D rendering pipeline, I added a forward rendering path to my engine, which stores renderables in a scene, and then can render everything in that scene to a specified camera. The render path creates specific draw calls for each renderable, and sorts draw calls according to their rendering layer (opaque, alpha, etc.), and sorts renderables in the alpha layer by their distance to the camera. For objects affected by lighting, the render path also establishes which lights in the scene are affecting each renderable (the 8 closest lights to the renderable). Additionally, the render path handles set up for the camera, including screen clearing (in this case to a skybox), and setting up particle systems made up of billboarded sprites for the camera's position. After the camera is set up, and all of the draw calls have been created and sorted, the render path binds the render state for each draw call and passes the mesh to the GPU. The forward rendering path simplifies rendering large scenes like the one in tank-game - now, each entity's renderable just needs to be added to the render scene, instead of carefully ordering which entities need to be rendered at what times within the game's render loop.</p>
+        <p>Lighting is done in a shader using a simple blinn-phong model. For the sake of expanding my understanding of the lighting algorithm, I added a simple cel-shading algorithm, which is used on everything except the terrain in the game. Both models use the shadow camera's depth target to establish which areas are in complete shadow.</p>
         <br>
+
+<pre class="prettyprint linenums language-xml">
+void ForwardRenderPath::RenderSceneForCamera(Camera * cam, RenderScene * scene)
+{
+    //bind the camera's model and projection matrices for every draw call
+    m_renderer->BindCamera(cam);
+
+    //clears to a color, or to a skybox
+    ClearForCamera(cam);
+
+    //updates the particle system's meshes to be billboarded to this camera
+    for (ParticleSystem* s : scene->m_particleSystems){
+        s->PreRenderForCamera(cam);
+    }
+
+    std::vector<DrawCall> drawCalls;
+    // generate the draw calls
+    for(Renderable* r : scene->m_renderables){
+        //this will change for multi-pass shaders or multi-material meshes
+        Light* lights[MAX_LIGHTS];
+        if (r->GetEditableMaterial()->UsesLights()){
+            ComputeMostContributingLights(lights, r->GetPosition(), scene->m_lights);
+        }
+        //meshes can have multiple submeshes, which shares the renderable's model matrix but can have its own material. 
+        //Each submesh is it's own drawcall
+        for (int i = 0; i < (int) r->m_mesh->m_subMeshes.size(); i++){
+            DrawCall dc;
+            //set up the draw call for this renderable :)
+            // the layer/queue comes from the shader!
+            dc.m_mesh = r->m_mesh->m_subMeshes[i];
+            dc.m_model = r->m_transform.GetWorldMatrix();
+            dc.m_material = r->GetEditableMaterial(i);
+            dc.m_layer = r->GetEditableMaterial(i)->m_shader->m_sortLayer;
+
+            //if this game has shadows, bind the shadow camera's depth target
+            if (m_usingShadows){
+                dc.m_material->SetTexture(SHADOW_DEPTH_BINDING, scene->m_shadowCamera->GetDepthTarget());
+            }
+            //if we use lights, add the vector of lights we used earlier
+            if (r->GetEditableMaterial(i)->UsesLights()){
+                dc.SetLights(lights);
+            }
+            //add the draw call to your list of draw calls
+            drawCalls.push_back(dc);
+        }
+    }
+
+    //now we sort draw calls by layer/queue
+    //and sort alpha layer by distance to camera, etc.
+    SortDrawCalls(drawCalls, cam);
+
+    //for each draw call, bind render state and draw the mesh.
+    for(DrawCall dc: drawCalls){
+        //an optimization would be to only bind the thing if it's different from the previous bind.
+        m_renderer->BindMaterial(dc.m_material);
+        m_renderer->BindModel(dc.m_model);
+        m_renderer->BindLightUniforms(dc.m_lights);
+        m_renderer->BindStateAndDrawMesh(dc.m_mesh);
+    }
+}
+</pre>
+<div align="center"> ForwardRenderPath.cpp : Sets up the draw calls for the camera and draws everything in the scene.</div>
+<br>
 
         <br>
         <a href="#top"> Back To Top</a>
@@ -272,8 +368,6 @@ void Player::SetWorldPositionFromXZPosition()
         </div>
     -->
         <!-- /.row -->
-
-        <hr>
 
         <!-- Footer -->
         <footer>
