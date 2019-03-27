@@ -26,7 +26,7 @@ footer {
 
 }
 
-.unwelcome-bg, .adventure-bg, .irl-bg, .asteroids-bg, .larana-bg {
+.unwelcome-bg, .adventure-bg, .irl-bg, .asteroids-bg, .larana-bg, .smallprojects-bg, .tankgame-bg {
   position: relative;
   background-color: rgba(255,255,255,0.5);
   background-attachment: fixed;
@@ -63,6 +63,11 @@ footer {
 
 .smallprojects-bg {
   background-image: url("https://etrizzo.github.io/images/smallprojects/background.png");
+  min-height: 400px;
+}
+
+.tankgame-bg {
+  background-image: url("https://etrizzo.github.io/images/tankgame/terrain.png");
   min-height: 400px;
 }
 
