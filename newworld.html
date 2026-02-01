@@ -43,14 +43,14 @@
         <!-- Portfolio Item Heading -->
         <div class="jumbotron">
 
-                <h1 class="page-header" id="top">ProjectName
+                <h1 class="page-header">New World: Aeternum
                 </h1>
                 <hr>
                 <h3>
-                    Subtitle
+                    <b>World Experience Engineer</b>  |  June 2021 - January 2026
                 </h3>
                 <!-- img: -->
-                <img src="https://etrizzo.github.io/NW/nw_keyart.jpg" width="100%" height="700px" scrolling="no" style="border:0px #000000 none;" name="FeatureImage" align="center">
+                <img src="https://etrizzo.github.io/images/NW/nw_keyart.jpg" width="100%" scrolling="no" style="border:0px #000000 none;" name="New World: Aeternum" align="center">
                 <!-- video: -->
                 <!--
                 <div class="embed-responsive embed-responsive-16by9">
@@ -66,18 +66,16 @@
 
         <!-- Portfolio Item Information -->
         
-        <div class="row">
+        <div class="row" id="top">
 
              <div class="col-xs-12 col-sm-8">
-                <h3>About My Project</h3>
-                <p>About the project
+                <h3>About New World: Aeternum</h3>
+                <p>New World: Aeternum is an action-oriented MMORPG, where you play as a seventeenth-century adventurer who has washed up on the mystical isle of Aeternum. With its unique combat, flexible player progression, and immersive environment, New World had a wildly successful launch, peaking at nearly one million concurrent players after release. Over the course of the next four years, we released four major content updates, with two new zones, a complete zone overhaul, ten seasonal content updates, and a console release of the game. While the game maintained a dedicated fan base over its life, Amazon ultimately made the decision to end future development for New World in October 2025.
                 </p>
-                <p>
-                This is cool
-                </p>
+ 
                 <h3>My Role</h3>
                 <p>
-                    This is what I did.
+                I joined the New World team shortly before the game launched in 2021 as a World Experience Engineer. Over the course of my 4.5 years on the project, I worked on many gameplay systems, including quests, seasonal events, house decoration, camp building, and player inventory. Over the course of my last year at Amazon, I shifted my development focus towards tools to help our designers complete the ambitious quests they had planned for our final release, <i>Nighthaven</i>, on an extremely tight timeline. In my time working on New World, I greatly appreciated having the freedom to dive into a wide range of systems, and touch many aspects of the game - below, I've highlighted some of my favorite features and contributions to the team.
                 </p>
             </div>
 
@@ -88,95 +86,252 @@
                         <tbody>
                             <tr>
                                 <td>Role:</td>
-                                <td><b>Lead Programmer</b></td>
+                                <td><b>World Experience Engineer</b></td>
                             </tr>
                             <tr>
-                                <td>Team size:</td>
-                                <td><b>14</b></td>
+                                <td>Genre:</td>
+                                <td><b>MMORPG, Action RPG</b></td>
                             </tr>
                             <tr>
-                                <td>Engine</td>
-                                <td><b>Unreal Engine 4</b></td>
+                                <td>Platforms:</td>
+                                <td><b>Windows, Xbox Series X/S, PlayStation 5</b></td>
+                            </tr>
+                            <tr>
+                                <td>Engine:</td>
+                                <td><b>Azoth Engine</b></td>
                             </tr>
                             <tr>
                                 <td>Tools:</td>
-                                <td><b>Blueprint, C++</b></td>
-                            </tr>
-                            <tr>
-                                <td>Development Time:</td>
-                                <td><b>5 months</b>
-                                    <br>(3 hours/day)
-                                </td>
+                                <td><b>C++, Lua, ImGUI, Qt</b></td>
                             </tr>
                         </tbody>
                     </table>
 
                 </div>
-
-                <div class="well">
-                    <h3 style="margin-top: 5px;">Download/Github</h3>
-                    <center>
-                    <a href="https://store.steampowered.com/app/934860/La_Rana/"><img src="https://etrizzo.github.io/images/steamdownload.png" class="img-responsive" align="center" /></a>
-                    
-
-                    <a href="https://store.steampowered.com/app/934860/La_Rana/">A steam page!</a>
-                    <br>
-                    <br>
-                     <a href="https://github.com/etrizzo/PersonalEngineGames/"><button type="button" class="btn btn-primary">
-                          A regular button!
-                    </button></a>
-                    </center>
-                </div>
-
-                <div class="well">
-                    <h3 style="margin-top: 5px;">Features</h3>
-                     <ul>
-                        <li><a href="#section1">Section 1</a></li>
-                    </ul>
-                </div>
             </div>
         </div>
 
+        <div class="row">
+                <div class="well">
+                    <h3 style="margin-top: 5px;">Content</h3>
+                    <hr>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#quests"><h4>Quests and Quest Tools</h4></a>
+                            <ul>
+                                <li><a href="#repeatable">Repeatable Quests</a></li>
+                                <li><a href="#quest_tool">Quest Tool</a></li>
+                                <li><a href="#camera">Dialogue Camera Tool</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#wex"><h4>World Experience</h4></a>
+                            <ul>
+                                <li><a href="#storage">Global Storage</a></li>
+                                <li><a href="#housing">Housing</a></li>
+                                <li><a href="#worldchanges">World Changes</a></li>
+                                <!-- <li><a href="#camps">Camping</a></li>
+                                <li><a href="#ui">User Interface</a></li> -->
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+        </div>
 
-        <h3>Game Features</h3>
+
+        <h2 id="quests">Quests and Quest Tools</h3>
         <hr>
 
 <!-- Game Feature Template -->
-        <h4 id="section1">Section 1</h4>
-        <div align="center">
-            <img src = "https://etrizzo.github.io/FeatureImage.png" width="100%" align="center">
+        <h3 id="repeatable">Repeatable Quests</h4>
+        <p>The responsibilities of the World Experience team included maintaining and expanding the quest system, and over the course of my time at New World I worked on a number of quest features and gatherables. One feature I engineered was expanding the quest system to allow for repeatable quests. This feature was originally developed to make seasonal quests for our holiday events automatically reset at the end of each event, so that designers would not have to remake the same quest for the following year - however I architected the system to allow a wide range of applications, such as daily or weekly quests. Designers used this system to reward players who logged into our game every single day, in the form of recurring quest rewards for completing dungeons, engaging in PvP, or participating in world events.</p>
+        <br>
+
+        <br>
+        <a href="#top"> Back To Top</a>
+        <br>
+
+        <h3 id="quest_tool">Quest Tool</h4>
+            <div align="center"> 
+                <img src="https://etrizzo.github.io/images/NW/nw_nighthaven.jpg" width="70%" scrolling="no" style="border:0px #000000 none;" name="Dialogue Camera" >
+                <br>
+            <i>The quest tool was used to complete the quests for the release of Nighthaven on an extremely tight timeline</i></div>
+            <br>
+        <p> For the release of <i>Nighthaven</i>, we brought our internal quest tool into production to complete the quests for the new zone, as well as to re-write quests for existing zones. The tool, written using the Qt framework, had been primarily developed by an external team, but at the time that I joined still had a lot of work to do before it was ready to be integrated into our team's workflow. As designers began to transition from bloated Excel workflows to the custom tool, it was critical that the tool was reliable, intuitive, and foolproof. I worked with the design team to identify friction points with the tool, and found quick and effective solutions to allow the tool to become usable as soon as possible. </p>
+
+        <!-- <div class="row"> -->
+        <!--<div class="col-xs-12 col-sm-8">-->
+        <h4>Simplifying Data Authoring</h4>
+        <p>
+            The purpose of a tool is to make the data authoring process easier - this includes data formats that are complex and unintuitive to construct. My team developed a feature to allow quest designers to globally track progress throughout a quest, in the form of “locking” and “unlocking” a unique identifier based on task state. These locks, referred to as NPAs internally, were critical for things like showing or hiding an NPC based on how far the player had progressed in a quest. In the quest tool, I was tasked with adding a visual indicator of where within a quest the NPA would lock or unlock - however, I realized as I was working on the system that we should also add a simple editor within the tool to provide designers with a more intuitive way to use this powerful but complicated feature. This was important because the NPAs were defined as a long, complex text string, with a very specific data format. This worked fine with test data, but I knew that as designers began using the system, it would be exhausting to incorporate into the long, complex questlines they create. I coordinated with designers to come up with a simple but effective visual editor that would significantly simplify the process of authoring the NPA data, which helped designers understand the system better, and to utilize this powerful system without fear of a mistyped character causing disastrous, hard-to-understand bugs down the line.
+
+        </p>
+        <!-- </div> -->
+        <!--
+        <div class="col-xs-12 col-sm-4">
+            <p>[TODO: diagram]</p>
         </div>
-        <br>
-        <p>CONTENT GOES HERE LOL</p>
-        <br>
+        -->
+        <!-- </div> -->
+<!------------------------------------------------------------>
 
+        <h4>Future-Proofing</h4>
+        <p>
+        Live service games are constantly changing, and sometimes that means the data must be changed too. One controversial fallback of the quest tool was that it was much more difficult to mass-edit quests when needed - in Excel, its as easy as a find & replace all, but in the quest tool, each quest had to be individually updated. To address this, I added a system for programmatically updating the data for all quests made in the quest tool, so that changes to any quest systems would not require designers to edit data for hundreds of existing quests. I felt strongly that mass edits should be done carefully, and should be extremely obvious to the user making the changes - so I had the system track all quests that were converted, and pop up a detailed list of all changes before prompting the user to save and submit the conversions immediately. While the first iteration of this feature required a programmer to make the data conversion, it proved to be absolutely necessary in getting the Nighthaven and updated Reekwater quests ready to ship.
+        </p>
         <pre class="prettyprint linenums language-cpp">
-class Garbage{
-public:
-    Garbage(){};
-    Garbage(Vector2 position) {};
+// [PSEUDO-CODE]
+// The DATA_CONVERSION macro is used to define a data conversion, along with a helpful message to understand what the change is doing.
+// All defined data conversions run on the base XML as the quest tool reads in quests from disk. 
+// If the associated lambda function returns true, the quest has been modified - 
+// It is then checked out from source control, saved, and displayed in a detailed list of converted quests as the tool starts up.
+DATA_CONVERSION(questElement, "[JIRA-12345] Change all Morgaine quests to be Cecilia quests instead", [this]()
+{
+    //If the quest_giver attribute on the quest node is Morgaine, change it to Cecilia
+    if (GET_ATTRIBUTE(questElement, "Quest_Giver") == "Morgaine"){
+        SET_ATTRIBUTE(questElement, "Quest_Giver", "Cecilia");
+	    
+        // Return true if the quest was modified so that we can add it to the list of converted quests
+        return true;
+    }
+	
+    // The quest does not need to be converted.
+    return false;
+});</pre>
+<div align="center"> <i>Example of how a new data conversion is defined</i></div>
+        <!------------------------------------------------------------>
+        <!-- <div class="row"> -->
+        <!-- <div class="col-xs-12 col-sm-8"> -->
+        <h4>Streamlining Workflow</h4>
+        <p>
+            There are many different data types associated with quests - including definitions for NPCs, dialogue states, quests, quest tasks, and more. While much of this data needs to be kept separate, there are some elements that should stay consistent between the different data types, such as the release version for a quest and its sub-tasks. When I started working on the quest tool, it made no assumptions about any data, resulting in a lot of copy/pasting and missed data entries that would cause bugs down the line. I worked closely with designers to identify the most frustrating aspects of working in the quest tool, and added logic to automatically sync fields that should always be consistent, saving us a lot of time in the quest crafting, and a lot of future headaches debugging issues caused by missed data fields.
 
-    virtual void EatGarbo() = 0;
-};
+        </p>
+        <!-- </div>
+        <div class="col-xs-12 col-sm-4">
+            <p>[TODO: diagram]</p>
+         </div> -->
+        <!-- </div> -->
+<!------------------------------------------------------------>
+        <br>
 
-class Garbage_A : public Garbage{
-public:
-    Garbage_A(Vector2 position);
+        <br>
+        <a href="#top"> Back To Top</a>
+        <br>
 
-    void EatGarbo() override;
+        <h3 id="camera">Dialogue Camera Tool</h3>
+            <div align="center"> 
+                <img src="https://etrizzo.github.io/images/NW/NPC.jpg" width="70%" scrolling="no" style="border:0px #000000 none;" name="Dialogue Camera" >
+                <br>
+            <i>In New World, opening a dialogue with an NPC transitions from the gameplay camera to a cutscene camera, focused on the speaker</i></div>
+            <br>
+        <p>
+            When players interact with an NPC, the camera focuses on the NPC according to a camera values associated with the dialogue line. While these values can be determined by a pre-set angle based on the NPC’s position, any further modifications required designers to manually enter dozens of camera values in a complex, unintuitive data format, and then carefully copy each value one by one into a spreadsheet before reloading the game. To speed up this workflow, I developed an in-game tool to allow designers to dynamically move the camera, adjust camera values such as FOV and depth of focus, and then easily export the values to our datasheets. Users can also adjust the location of the player/NPCs in the dialogue cutscene, as well as modify their head angle. This allowed designers to very quickly create more dynamic dialogue sequences, with less repetitive camera angles, and more interesting character framing to better convey the emotion of the quest. 
+        </p>
+        <p>
+            I took care to ensure this tool was as user-friendly as possible. This meant modifying the camera values with intuitive sliders, radio buttons, and selection menus, and having the tool use the current settings to generate the complex data formats the game reads from saved data. It was also critical to understand how the tool was being used - when I spoke to designers about the problems they were facing, they stressed how unforgiving the existing system was. For example, if they made any mistakes while editing, such as accidentally exiting out of the NPC dialogue or entering a data field incorrectly, any existing changes would be lost, and they would have to start over, which was an extremely time consuming and frustrating process. To address this, I made a system that tracked each modified camera state while the game was open, so players could modify multiple camera states in a single session - which was very useful for editing cameras for an entire questline. Dialogue cameras are tied to the current dialogue key, so this system worked by creating a map of dialogue key -> overridden camera values for every camera that the tool had modified. When a dialogue is opened, the camera system first checks if there are any overridden camera values to load in place of the values read from disk - allowing designers to pick up editing where they left off seamlessly. These override values could then be bulk-exported at the end of the session, and pasted into the correct datasheet in one single chunk of data.
 
-    Garbo* m_garboToEat;
-};
-
-
-</pre>
-<div align="center"> Garbo.hpp : Code Sample using Prettyprint</div>
-                    <br>
+        </p>
+        <hr>
+        <br>
         <br>
         <a href="#top"> Back To Top</a>
         <br>
         <hr>
 
+        <h2 id="wex">World Experience</h3>
+        <hr>
+<!-- 
+                                        <li><a href="#storage">Global Storage</a></li>
+                                <li><a href="#housing">Housing</a></li>
+                                <li><a href="#worldchanges">World Changes</a></li>
+                                <li><a href="#camps">Camping</a></li>
+                                <li><a href="#ui">User Interface</a></li> -->
+
+        <h3 id="storage">Global Storage for Crafting</h3>
+        <h4>Problem Description</h4>
+        <p>
+            In New World, the player has a local inventory, and around 20 storage sheds located throughout the world that they can deposit items into. Each storage shed has a cap on the number of items it can hold, but players can move items freely between any visited storage sheds while interfacing with a shed. This implementation allows us to limit the number of stored items that are replicated to the player’s client at any given time - in general, we only care about the items stored in the zone the player is currently in.
+        </p>
+        <p>
+            However, this created a frustrating experience for crafters in our game - crafting tables could only pull ingredients from the local storage shed, so players would have to sift through all of their storage sheds trying to find relevant ingredients and move them to the local shed before crafting. Since the launch of New World, players have begged to have crafting stations pull ingredients from all storage sheds, to get rid of the need for inventory micromanagement.
+        </p>
+        <p>
+            While the quality of life improvement for this feature would be extremely significant, implementation had to account for performance and scale. Across all of their storage sheds, players could potentially have more than 10,000 unique items in global storage, each with around 60 bytes of data. Frequently replicating and iterating over all of these items would be a significant hit to messaging bandwidth, client RAM, and performance - especially with hundreds or thousands of players requesting these items from the server at the same time.
+        </p>
+        <h4>Solution</h4>
+        <p>
+            While the client needs to know how many ingredients we have while crafting, the number of ingredients that can be used at each type of crafting station is relatively small. Instead of replicating the entire list of all 10,000 unique items the player may have in their storage, we only need to search for the 50 or so relevant items. Additionally, most of the item data size is not relevant to crafting - the entire item data contains information about perks, rarity, and stats, but all that matters to the crafting system is the item id, and the quantity we have.
+        </p>
+        <p>
+            With this information, I engineered a system that would create a roster of relevant items, and the storage sheds that contained them. When the player opens a crafting station, the system creates search parameters based on the item types needed, and iterates once over the player’s global storage sheds. If an item matches the search parameters, the item and its local quantity is added to the search results - additionally, the current storage shed is added to the list of relevant storage sheds. Once this process is complete, we replicate the list of unique item ids and their total quantities, to be displayed on the crafting screen. By only replicating the id and quantity, the number of bytes per unique item is reduced from 60 to only 8 bytes.
+        </p>
+        <p>
+            When the player crafts an item, it changes the global item quantities for the ingredients we're tracking, but we don’t want to have to repeat the entire search process every time the player crafts something. Instead, we maintain the quantities within the search results roster, in addition to removing the items from the sheds we marked as having search result items. When items are successfully removed from a storage shed, the quantity removed is deducted from the results roster on the server, and that updated item quantity is replicated back to the client.
+        </p>
+        <p>
+            This implementation allowed for players to craft with their global storage contents seamlessly, and with minimal performance and memory impact - in fact, rewriting the storage replication logic allowed for several optimizations in the replicated size of the player, since the amount of data replicated for crafting was significantly reduced due to only tracking the item ids and quantities. This feature launched shortly after the release of Nighthaven, and was widely celebrated by hardcore crafters in the game. 
+        </p>
+        <br>
+        <a href="#top"> Back To Top</a>
+        <br>
+
+        <h3 id="housing">Player Housing</h3>
+        <div align="center"> 
+                <img src="https://etrizzo.github.io/images/NW/housing.jpg" width="70%" scrolling="no" style="border:0px #000000 none;" name="Housing" >
+                <br>
+            <i>Players can purchase and decorate houses in up to 3 settlements throughout the world</i></div>
+            <br>
+        <p>
+            In new world, players can purchase and decorate houses in up to 3 settlements throughout the world. I inherited ownership of this complex system, and was responsible for any updates to the housing system, and for debugging any live issues identified by players.
+        </p>
+        <p>
+            [Under Construction]
+        </p>
+        <br>
+        <a href="#top"> Back To Top</a>
+        <br>
+
+        <h3 id="worldchanges">World Changes</h3>
+        <div align="center"> 
+                <img src="https://etrizzo.github.io/images/NW/nw_rotae.jpg" width="70%" scrolling="no" style="border:0px #000000 none;" name="Dialogue Camera" >
+                <br>
+            <i>In the lead-up to the Rise of the Angry Earth expansion, the First Light settlement was destroyed and the zone was entirely revamped</i></div>
+            <br>
+        <p>
+            With the introduction of New World: Rise of the Angry Earth, the First Light settlement was destroyed and the entire zone was re-worked into a high-level, uninhabitable wild zone. This was an incredibly cool and immersive design choice - but we had to ensure players didn’t feel “cheated” by the destruction of a zone they had invested their time and money into. On the housing front, this meant ensuring their houses were properly refunded, their stored items were easily accessible, and that players understood at log-in what happened. This change required careful modification of storage and housing logic, to ensure players could not lose their items.
+        </p>
+        <p>
+            I engineered a system to refund removed plots as soon as the player logged in, and immediately refund the contents and notify the players. Typically, a player’s house contents are loaded from the database through the housing plot it was purchased on - however, the plots in this settlement had been destroyed. I added logic to identify when a player had owned a house on a destroyed plot, and to re-route the critical restoration process through the player. Once the house’s contents have been loaded, the items are sent to a designated storage shed, the house gold cost is refunded, and after confirming the transactions succeeded, the house data is deleted from the database. Additionally, a popup was shown immediately notifying the player of the house destruction, how much gold they were refunded, and where they could find their housing items. 
+        </p>
+        <p>
+             In addition to the housing changes outlined above, all storage items had to be moved from the existing first light settlement storage shed to a new shed - and players needed to be able to pull the items from this shed to recover their items immediately, even though the shed was inaccessible until the ROTAE quests were progressed. I added configurable logic to move items from a source shed to a destination shed on login, and added checks to ensure that items could always be remotely withdrawn from an inaccessible storage shed via the storage menu. Because this change only happened once on the player's first login, I also added extensive testing features to be able to force a player into the state that would trigger the move, so that the feature could be tested easily at scale. This system proved to be invaluable, and was used to alter storage locations for several future zone changes. 
+        </p>
+        <br>
+        <a href="#top"> Back To Top</a>
+        <br>
+
+        <!-- <h3 id="camps">Camping</h3>
+        <div align="center"> 
+                <img src="https://etrizzo.github.io/images/NW/camp.jpg" scrolling="no" style="border:0px #000000 none;" name="Dialogue Camera" >
+                <br>
+            <i>Players can place camps in the open world, where they can respawn and craft minor items</i></div>
+            <br>
+        <p>
+            [Under Construction]
+        </p>
+        <br>
+        <a href="#top"> Back To Top</a>
+        <br> -->
+
+        <!-- <h3 id="ui">User Interface</h3>
+        <p>
+            [Under Construction]
+        </p>
+        <br>
+        <a href="#top"> Back To Top</a>
+        <br>
+ -->
 
 
         <!-- /.row -->
