@@ -282,12 +282,38 @@ DATA_CONVERSION(questElement, "[JIRA-12345] Change all Morgaine quests to be Cec
                 <br>
             <i>Players can purchase and decorate houses in up to 3 settlements throughout the world</i></div>
             <br>
-        <p>
-            In new world, players can purchase and decorate houses in up to 3 settlements throughout the world. I inherited ownership of this complex system, and was responsible for any updates to the housing system, and for debugging any live issues identified by players.
-        </p>
-        <p>
-            [Under Construction]
-        </p>
+        
+            <div class="row">
+             <div class="col-xs-12 col-sm-8">
+                <p>
+            In new world, players can purchase and decorate houses in up to 3 settlements throughout the world. I inherited ownership of this complex system, and was responsible for any updates to the housing system, and for debugging any live issues identified by players. 
+            </p>
+                <p>During my time working on this system, I worked closely with designers to develop improvements to the decoration and scoring systems, and took special care to incorporate many intuitive, data-driven tuning factors to this system. I also created simple developer tools to visualize the effect of these tuning factors, and overhauled the housing telemetry system to track these changes, and so that other developers could quickly identify the cause of any live issues with the housing system.
+            </p>
+                            <p> I also took steps to mitigate any live bugs with the housing system by solidifying the housing data save system, so that any glitches in loading a players house would be instantly caught and rectified, before it became a player-facing issue. I expanded the housing system's "data handshake" to cover a wider range of possible problems, and as a result the number of live housing bugs dropped significantly.</p>
+                    </div>
+                    <div class="col-xs-12 col-sm-4">
+                        <a href="#" data-toggle="modal" data-target="#housingModal" ><img src = "https://etrizzo.github.io/images/NW/housing_handshake_diagram.png" name="Housing Diagram" class="modal-click" width="100%"></a>
+                 
+                        <div id="housingModal" class="modal fade" role="dialog">
+                        <div class="modal-dialog modal-lg">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                          <div class="modal-body">
+                            <center>
+                            <img src = "https://etrizzo.github.io/images/NW/housing_handshake_diagram.png" name="Housing Diagram" class="img-rounded" width="100%">
+                            <br>
+                             <p>Diagram describing the "handshake" process, which restores and connects the player's house data from the database on log-in.</p>
+                         </center>
+                          </div>
+                        </div>
+                        </div>
+
+                        </div>
+                        <br>
+                    </div>
+                </div>
+         
         <br>
         <a href="#top"> Back To Top</a>
         <br>
