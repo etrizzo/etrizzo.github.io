@@ -17,7 +17,7 @@ footer {
 }
 
 
-.content{
+.content, .ceramics-content{
 	 background-color: ghostwhite; 
 	 padding: 40px;
    border-style: solid;
@@ -26,7 +26,7 @@ footer {
 
 }
 
-.unwelcome-bg, .adventure-bg, .irl-bg, .asteroids-bg, .larana-bg, .smallprojects-bg, .tankgame-bg, .minecraft-bg, .nw-bg {
+.unwelcome-bg, .adventure-bg, .irl-bg, .asteroids-bg, .larana-bg, .smallprojects-bg, .tankgame-bg, .minecraft-bg, .nw-bg, .art-bg {
   position: relative;
   background-color: rgba(255,255,255,0.5);
   background-attachment: fixed;
@@ -34,6 +34,14 @@ footer {
   background-repeat: no-repeat;
   background-size: cover;
 
+}
+
+.art-bg {
+  background-color: rgb(153, 102, 81);
+}
+
+.ceramics-content{
+  border-color:  rgb(49, 28, 38);
 }
 
 .minecraft-bg {
@@ -90,6 +98,18 @@ footer {
 .modal-click:hover {
   border-style: solid;
   border-width: 4px;
+}
+
+
+.gallery-modal-click {
+  box-shadow: 5px 5px 10px grey;
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+
+.gallery-modal-click:hover {
+  border-style: solid;
+  border-width: 2px;
 }
 
 
